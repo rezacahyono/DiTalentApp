@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         boardingViewModel.isFirstRun.observe(this){ isFirstRun ->
-            boardingViewModel.updateisFirstRun(false)
+            boardingViewModel.updateIsFirstRun(false)
             if (isFirstRun){
                 val intent = Intent(this, BoardingActivity::class.java)
                 startActivity(intent)

@@ -18,7 +18,7 @@ class BoardingViewModel @Inject constructor(
     val isFirstRun: LiveData<Boolean> = settingPreferenceRepository.isFirstRun.asLiveData()
 
 
-    fun updateisFirstRun(value: Boolean) {
+    fun updateIsFirstRun(value: Boolean) {
         viewModelScope.launch {
             settingPreferenceRepository.updateIsFirstRun(value)
         }
