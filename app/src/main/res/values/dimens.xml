@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="root_padding">24dp</dimen>
+    <dimen name="margin_vertical_button_slide">20dp</dimen>
+    <dimen name="margin_vertical_text_slide">16dp</dimen>
+
+    <dimen name="button_rounded">8dp</dimen>
+
+    <dimen name="width_indicator_vp">25dp</dimen>
+    <dimen name="height_indicator_vp">2dp</dimen>
+
+</resources>

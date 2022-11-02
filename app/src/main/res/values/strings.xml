@@ -1,3 +1,18 @@
 <resources>
+
     <string name="app_name">DiTalent</string>
+
+    <!--  Text Boarding  -->
+    <string name="text_button_skip">Skip Dulu, Langsung Masuk</string>
+    <string name="text_button_next">Slide Selanjutnya</string>
+    <string name="image_boarding">Image boarding</string>
+
+    <string name="title_slide_one"><![CDATA[<font color=#87000000>What is Lorem </font> <font color=#FF903F>Ipsum?</font>]]></string>
+    <string name="title_slide_two"><![CDATA[<font color=#87000000>Where can </font> <font color=#FF903F>I get some?</font>]]></string>
+    <string name="title_slide_three"><![CDATA[<font color=#87000000>Why do</font> <font color=#FF903F>we use it?</font>]]></string>
+
+    <string name="description_slide_one">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
+    <string name="description_slide_two">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</string>
+    <string name="description_slide_three">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
+
 </resources>

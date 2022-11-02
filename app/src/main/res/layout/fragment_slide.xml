@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/root_padding"
+    tools:context=".ui.fragments.slide.SlideFragment">
+
+    <ImageView
+        android:id="@+id/iv_image_boarding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/root_padding"
+        android:contentDescription="@string/image_boarding"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@id/tv_title_boarding"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:layout_editor_absoluteX="24dp"
+        tools:src="@drawable/slide_board_1" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_title_boarding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.DiTalent.Headline6"
+        app:layout_constraintBottom_toTopOf="@id/tv_description_boarding"
+        app:layout_constraintTop_toBottomOf="@id/iv_image_boarding"
+        tools:text="What is Lorem" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_description_boarding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="@dimen/margin_vertical_text_slide"
+        android:textAppearance="@style/TextAppearance.DiTalent.Body2"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_boarding"
+        tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

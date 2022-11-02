@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.boarding.BoardingActivity">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/page_boarding"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_next"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+        android:id="@+id/indicator_vp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:dotsColor="?android:textColorSecondary"
+        app:dotsCornerRadius="8dp"
+        app:dotsSize="8dp"
+        app:dotsSpacing="2dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/page_boarding"
+        app:selectedDotColor="@color/orange" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_next"
+        style="@style/Widget.DiTalent.Button.Filled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_marginHorizontal="@dimen/root_padding"
+        android:text="@string/text_button_next"
+        app:layout_constraintBottom_toTopOf="@id/btn_skip"
+        app:layout_constraintTop_toBottomOf="@id/indicator_vp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_skip"
+        style="@style/Widget.DiTalent.Button.Outlined"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/root_padding"
+        android:layout_marginTop="@dimen/margin_vertical_button_slide"
+        android:layout_marginBottom="@dimen/root_padding"
+        android:text="@string/text_button_skip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_next" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
