@@ -1,4 +1,13 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        core_ktx_version = "1.9.0"
+        app_compat_version = "1.5.1"
+        material_version = "1.7.0"
+        constraint_version = "2.1.4"
+        splash_version = "1.0.0"
+    }
+}
 plugins {
     id 'com.android.application' version '7.3.0' apply false
     id 'com.android.library' version '7.3.0' apply false
