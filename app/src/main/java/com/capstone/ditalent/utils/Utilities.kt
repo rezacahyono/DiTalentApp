@@ -3,6 +3,7 @@ package com.capstone.ditalent.utils
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
+import android.util.Patterns
 
 object Utilities {
 
@@ -15,4 +16,5 @@ object Utilities {
         }
     }
 
+    fun String.isNotValidEmail() = this.isNotEmpty() && !Patterns.EMAIL_ADDRESS.matcher(this).matches()
 }

@@ -6,16 +6,16 @@
         <item name="android:textAppearance">@style/TextAppearance.DiTalent.Button</item>
         <item name="shapeAppearance">@style/ShapeAppearance.DiTalent.SmallComponent</item>
         <item name="textAllCaps">false</item>
-        <item name="android:insetTop">0dp</item>
-        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetTop">4dp</item>
+        <item name="android:insetBottom">4dp</item>
     </style>
 
     <style name="Widget.DiTalent.Button.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button.TextButton</item>
         <item name="android:textAppearance">@style/TextAppearance.DiTalent.Button</item>
         <item name="shapeAppearance">@style/ShapeAppearance.DiTalent.SmallComponent</item>
-        <item name="android:insetTop">0dp</item>
-        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetTop">4dp</item>
+        <item name="android:insetBottom">4dp</item>
     </style>
 
     <style name="ThemeOverlay.App.Button.TextButton" parent="">
@@ -44,6 +44,28 @@
     <style name="TextAppearance.DiTalent.Body2" parent="TextAppearance.MaterialComponents.Body2">
         <!-- TODO: Masukin font family -->
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.DiTalent.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <!-- TODO: Masukin font family -->
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Layout Input Text   -->
+    <style name="Widget.DiTalent.LayoutInputText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintEnabled">false</item>
+        <item name="android:bottomRightRadius">@dimen/layout_input_text_corner</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/layout_input_text_corner</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/layout_input_text_corner</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/layout_input_text_corner</item>
+        <item name="boxCornerRadiusTopStart">@dimen/layout_input_text_corner</item>
+        <item name="boxBackgroundColor">#08121212</item>
+    </style>
+
+    <style name="Widget.DiTalent.LayoutInputText.Password" parent="Widget.DiTalent.LayoutInputText">
+        <item name="endIconMode">password_toggle</item>
+        <item name="itemIconTint">@color/purple_light</item>
     </style>
 
     <!--  ShapeAppearance  -->

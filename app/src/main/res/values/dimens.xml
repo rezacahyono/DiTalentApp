@@ -2,12 +2,23 @@
 <resources>
 
     <dimen name="root_padding">24dp</dimen>
-    <dimen name="margin_vertical_button_slide">20dp</dimen>
+    <dimen name="margin_vertical_button_slide">16dp</dimen>
     <dimen name="margin_vertical_text_slide">16dp</dimen>
 
     <dimen name="button_rounded">8dp</dimen>
 
     <dimen name="width_indicator_vp">25dp</dimen>
     <dimen name="height_indicator_vp">2dp</dimen>
+
+    <dimen name="margin_logo_text_top">24dp</dimen>
+    <dimen name="margin_logo_text_bottom">-10dp</dimen>
+    <dimen name="margin_edit_text_top_description_login">42dp</dimen>
+    <dimen name="margin_edit_text_top_description_register">34dp</dimen>
+
+    <dimen name="edt_size_height">48dp</dimen>
+    <dimen name="layout_input_text_corner">8dp</dimen>
+    <dimen name="margin_layout_text_to_title">8dp</dimen>
+    <dimen name="gutter_layout_text">12dp</dimen>
+    <dimen name="margin_button_login_register_top">32dp</dimen>
 
 </resources>

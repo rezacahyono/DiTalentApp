@@ -18,5 +18,21 @@
     <string name="description_slide_three">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    
+    <!-- Text login  -->
+    <string name="login">Login</string>
+    <string name="description_page_login">Selamat datang! Mari masuk dan nikmati kolaborasi umkm dan talent.</string>
+    <string name="enter">Masuk</string>
+    <string name="logo">logo</string>
+    <string name="email">Email</string>
+
+    <string name="email_no_valid">Email tidak valid</string>
+    <string name="password_rules_length">Kata sandi harus setidaknya 6 karakter</string>
+    <string name="hint_email">Masukan email kamu</string>
+    <string name="hint_password">Masukan password kamu</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Lupa Password ?</string>
+    <string name="registrasi">Registrasi</string>
+    <string name="dont_have_a_account">Kamu belom punya akun?</string>
 
 </resources>
