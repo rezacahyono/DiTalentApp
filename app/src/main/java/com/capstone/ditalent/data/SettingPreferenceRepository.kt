@@ -12,7 +12,6 @@ class SettingPreferenceRepository @Inject constructor(
     private val settingDataStore: DataStore<Preferences>
 ) {
 
-
     val isFirstRun: Flow<Boolean> = settingDataStore.data.map { preferences ->
         preferences[PreferencesKeys.FIRST_RUN_KEY] ?: true
     }
