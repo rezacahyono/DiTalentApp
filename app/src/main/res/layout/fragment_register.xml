@@ -1,14 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.fragments.register.RegisterFragment">
 
-    <!-- TODO: Slicing layout register -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="register" />
+        android:layout_height="wrap_content"
+        android:padding="@dimen/root_padding">
 
-</FrameLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/registrasi"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.DiTalent.Headline6"
+            android:textColor="@color/orange"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_logo_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_logo_text_top"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/logo_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_register" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_description_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_logo_text_bottom"
+            android:text="@string/description_page_login"
+            android:textAppearance="@style/TextAppearance.DiTalent.Body2"
+            android:textColor="@color/textColorSecondary"
+            app:layout_constraintTop_toBottomOf="@id/iv_logo_text" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/email"
+            android:textAppearance="@style/TextAppearance.DiTalent.Subtitle2"
+            app:layout_constraintTop_toBottomOf="@id/tv_description_login" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_edt_email"
+            style="@style/Widget.DiTalent.LayoutInputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_layout_text_to_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_email">
+
+            <com.capstone.ditalent.component.InputText
+                android:id="@+id/edt_email"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_height_edt"
+                android:hint="@string/hint_email"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:padding="0dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title_choose_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gutter_layout_text"
+            android:text="@string/user"
+            android:textAppearance="@style/TextAppearance.DiTalent.Subtitle2"
+            app:layout_constraintTop_toBottomOf="@id/layout_edt_email" />
+
+        <RadioGroup
+            android:id="@+id/rg_choose_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_layout_text_to_title"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_choose_user">
+
+            <RadioButton
+                android:id="@+id/rb_choose_umkm"
+                style="@style/Widget.DiTalent.RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="@dimen/gutter_horizontal_radio_button"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="@string/umkm" />
+
+            <RadioButton
+                android:id="@+id/rb_choose_talent"
+                style="@style/Widget.DiTalent.RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="@dimen/gutter_horizontal_radio_button"
+                android:layout_weight="1"
+                android:text="@string/talent" />
+
+        </RadioGroup>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gutter_layout_text"
+            android:text="@string/name"
+            android:textAppearance="@style/TextAppearance.DiTalent.Subtitle2"
+            app:layout_constraintTop_toBottomOf="@id/rg_choose_user" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_edt_name"
+            style="@style/Widget.DiTalent.LayoutInputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_layout_text_to_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_name">
+
+            <com.capstone.ditalent.component.InputText
+                android:id="@+id/edt_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_height_edt"
+                android:hint="@string/hint_name_umkm"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:padding="0dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title_no_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gutter_layout_text"
+            android:text="@string/no_phone"
+            android:textAppearance="@style/TextAppearance.DiTalent.Subtitle2"
+            app:layout_constraintTop_toBottomOf="@id/layout_edt_name" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_edt_no_phone"
+            style="@style/Widget.DiTalent.LayoutInputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_layout_text_to_title"
+            app:expandedHintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_no_phone"
+            app:prefixText="@string/prefix_no_phone"
+            app:prefixTextAppearance="@style/TextAppearance.DiTalent.Subtitle2"
+            app:prefixTextColor="@color/orange">
+
+            <com.capstone.ditalent.component.InputText
+                android:id="@+id/edt_no_phone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_height_edt"
+                android:hint="@string/hint_no_phone"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:padding="15dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gutter_layout_text"
+            android:text="@string/password"
+            android:textAppearance="@style/TextAppearance.DiTalent.Subtitle2"
+            app:layout_constraintTop_toBottomOf="@id/layout_edt_no_phone" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_edt_password"
+            style="@style/Widget.DiTalent.LayoutInputText.Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_layout_text_to_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_password">
+
+            <com.capstone.ditalent.component.InputText
+                android:id="@+id/edt_password"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_height_edt"
+                android:hint="@string/hint_password"
+                android:imeOptions="actionNext"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:padding="0dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_login"
+            style="@style/Widget.DiTalent.Button.Filled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_button_login_register_top"
+            android:text="@string/sign_up"
+            app:layout_constraintTop_toBottomOf="@id/layout_edt_password" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/you_have_a_account"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_login"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gutter_layout_text"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/login"
+            android:textAppearance="@style/TextAppearance.DiTalent.Button"
+            android:textColor="@color/orange"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_title_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_title_login" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

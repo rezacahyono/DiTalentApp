@@ -58,7 +58,10 @@ class InputText : AppCompatEditText {
         if (text.isNotValidEmail()) {
             layout?.let {
                 it.apply {
-                    error = context.getString(R.string.email_no_valid)
+                    error = context.getString(
+                        R.string.field_no_valid,
+                        context.getString(R.string.email)
+                    )
                     isErrorEnabled = true
                 }
             }

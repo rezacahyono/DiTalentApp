@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.capstone.ditalent.databinding.FragmentLoginBinding
 
 
@@ -20,6 +21,19 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.tvRegister.setOnClickListener {
+            navigateToRegister()
+        }
+    }
+
+
+    private fun navigateToRegister(){
+        val directions = LoginFragmentDirections.actionLoginNavToRegisterNav()
+        findNavController().navigate(directions)
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

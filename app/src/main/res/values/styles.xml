@@ -27,6 +27,15 @@
         <item name="colorOnPrimary">@color/white</item>
     </style>
 
+    <style name="Widget.DiTalent.RadioButton" parent="Widget.MaterialComponents.CompoundButton.RadioButton">
+        <item name="android:button">@null</item>
+        <item name="android:layout_height">@dimen/size_height_radio_button</item>
+        <item name="android:background">@drawable/selector_bg_btn</item>
+        <item name="android:textColor">@color/selector_text_btn</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAppearance">@style/TextAppearance.DiTalent.Button</item>
+    </style>
+
 
     <!--  Text Appearance  -->
     <style name="TextAppearance.DiTalent.Button" parent="TextAppearance.MaterialComponents.Button">

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.capstone.ditalent.R
 import com.capstone.ditalent.databinding.FragmentRegisterBinding
 
 
@@ -18,6 +19,21 @@ class RegisterFragment : Fragment() {
     ): View {
         _binding = FragmentRegisterBinding.inflate(layoutInflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        binding.apply {
+            rgChooseUser.setOnCheckedChangeListener { _, checkedId ->
+                val hintText =
+                    if (checkedId == R.id.rb_choose_umkm) getString(R.string.hint_name_umkm) else getString(
+                        R.string.hint_name_talent
+                    )
+                edtName.hint = hintText
+            }
+        }
     }
 
     override fun onDestroyView() {

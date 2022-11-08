@@ -15,10 +15,12 @@
     <dimen name="margin_edit_text_top_description_login">42dp</dimen>
     <dimen name="margin_edit_text_top_description_register">34dp</dimen>
 
-    <dimen name="edt_size_height">48dp</dimen>
+    <dimen name="size_height_edt">48dp</dimen>
     <dimen name="layout_input_text_corner">8dp</dimen>
     <dimen name="margin_layout_text_to_title">8dp</dimen>
     <dimen name="gutter_layout_text">12dp</dimen>
     <dimen name="margin_button_login_register_top">32dp</dimen>
 
+    <dimen name="gutter_horizontal_radio_button">10dp</dimen>
+    <dimen name="size_height_radio_button">38dp</dimen>
 </resources>

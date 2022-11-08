@@ -52,15 +52,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_layout_text_to_title"
-        app:hintEnabled="false"
         app:layout_constraintTop_toBottomOf="@id/tv_title_email">
 
         <com.capstone.ditalent.component.InputText
             android:id="@+id/edt_email"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/edt_size_height"
+            android:layout_height="@dimen/size_height_edt"
             android:hint="@string/hint_email"
             android:imeOptions="actionNext"
+            android:maxLines="1"
             android:inputType="textEmailAddress"
             android:padding="0dp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -80,13 +80,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_layout_text_to_title"
-        app:hintEnabled="false"
         app:layout_constraintTop_toBottomOf="@id/tv_title_password">
 
         <com.capstone.ditalent.component.InputText
             android:id="@+id/edt_password"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/edt_size_height"
+            android:layout_height="@dimen/size_height_edt"
+            android:maxLines="1"
             android:hint="@string/hint_password"
             android:imeOptions="actionNext"
             android:inputType="textPassword"
@@ -96,10 +96,11 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_forgot_password"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/gutter_layout_text"
         android:text="@string/forgot_password"
+        app:layout_constraintEnd_toEndOf="parent"
         android:textAlignment="textEnd"
         android:textAppearance="@style/TextAppearance.DiTalent.Button"
         app:layout_constraintTop_toBottomOf="@id/layout_edt_password" />
@@ -132,7 +133,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/gutter_layout_text"
-        android:text="@string/registrasi"
+        android:text="@string/sign_up"
+        android:clickable="true"
+        android:focusable="true"
         android:textAppearance="@style/TextAppearance.DiTalent.Button"
         android:textColor="@color/orange"
         app:layout_constraintBaseline_toBaselineOf="@id/tv_title_register"

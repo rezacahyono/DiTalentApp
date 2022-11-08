@@ -11,6 +11,6 @@
     <color name="orange_light">#FFC16E</color>
     <color name="orange_dark">#C6610A</color>
 
-    <color name="textColorPrimary">#87000000</color>
-    <color name="textColorSecondary">#7C7C7C</color>
+    <color name="textColorPrimary">#90000000</color>
+    <color name="textColorSecondary">#707070</color>
 </resources>
