@@ -10,7 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.capstone.ditalent.R
 import com.capstone.ditalent.adapter.BoardingAdapter
 import com.capstone.ditalent.databinding.ActivityBoardingBinding
-import com.capstone.ditalent.domain.model.Boarding
+import com.capstone.ditalent.model.Boarding
 import com.capstone.ditalent.ui.activities.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 

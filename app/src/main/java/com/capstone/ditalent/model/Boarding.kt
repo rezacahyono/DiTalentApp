@@ -1,4 +1,4 @@
-package com.capstone.ditalent.domain.model
+package com.capstone.ditalent.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

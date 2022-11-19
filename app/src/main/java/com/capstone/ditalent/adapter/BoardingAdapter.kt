@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.ditalent.databinding.ContainerItemBoardingBinding
-import com.capstone.ditalent.domain.model.Boarding
+import com.capstone.ditalent.model.Boarding
 import com.capstone.ditalent.utils.Utilities.fromHtml
 
 class BoardingAdapter : ListAdapter<Boarding, BoardingAdapter.BoardingViewHolder>(DiffCallback) {
