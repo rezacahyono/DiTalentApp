@@ -1,22 +1,19 @@
 package com.capstone.ditalent.ui.talent.activities
 
-import android.content.Intent
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.navigation.findNavController
+import androidx.core.view.isVisible
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.capstone.ditalent.R
-import com.capstone.ditalent.data.clearUser
 import com.capstone.ditalent.databinding.ActivityTalentBinding
-import com.capstone.ditalent.ui.auth.activities.AuthActivity
-import com.capstone.ditalent.ui.auth.fragments.login.LoginViewModel
-import dagger.hilt.android.AndroidEntryPoint
+import com.capstone.ditalent.utils.Utilities.margin
 
-@AndroidEntryPoint
 class TalentActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTalentBinding
-
-    private val loginViewModel: LoginViewModel by viewModels()
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,11 +22,36 @@ class TalentActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        binding.btnLogout.setOnClickListener {
-            loginViewModel.setUserPref(clearUser())
-            val intent = Intent(this, AuthActivity::class.java)
-            startActivity(intent)
-            finish()
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_container_talent) as NavHostFragment
+        navController = navHostFragment.navController
+
+        setupBottomNavigation(navController)
+        setupBottomNavVisible(navController)
+
+    }
+
+    private fun setupBottomNavigation(navController: NavController) {
+        val bottomNav = binding.bottomNavTalent
+        bottomNav.setupWithNavController(navController)
+    }
+
+    private fun setupBottomNavVisible(navController: NavController) {
+        val bottomNav = binding.bottomNavTalent
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.home_talent_nav,
+                R.id.project_talent_nav,
+                R.id.reward_talent_nav,
+                R.id.profile_talent_nav -> {
+                    binding.fragmentContainerTalent.margin(bottom = 56f)
+                    bottomNav.isVisible = true
+                }
+                else -> {
+                    binding.fragmentContainerTalent.margin(bottom = 0f)
+                    bottomNav.isVisible = true
+                }
+            }
         }
     }
 }

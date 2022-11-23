@@ -56,4 +56,13 @@
 
 
     <string name="please_wait">Mohon Tunggu…</string>
+
+    <!--  Menu  -->
+    <string name="home">Home</string>
+    <string name="project">Project</string>
+    <string name="reward">Reward</string>
+    <string name="profil">Profile</string>
+    <string name="chart">Chart</string>
+
+
 </resources>

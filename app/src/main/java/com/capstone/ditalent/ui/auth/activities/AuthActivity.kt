@@ -60,7 +60,7 @@ class AuthActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
+            supportFragmentManager.findFragmentById(R.id.fragment_container_auth) as NavHostFragment
         navController = navHostFragment.navController
 
         val route = intent.getStringExtra(BoardingActivity.ROUTE)

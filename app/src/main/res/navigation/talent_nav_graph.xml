@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/talent_nav_graph"
+    app:startDestination="@id/home_talent_nav">
+
+    <fragment
+        android:id="@+id/home_talent_nav"
+        android:name="com.capstone.ditalent.ui.talent.fragments.home.HomeTalentFragment"
+        android:label="fragment_home_talent"
+        tools:layout="@layout/fragment_home_talent" />
+    <fragment
+        android:id="@+id/project_talent_nav"
+        android:name="com.capstone.ditalent.ui.talent.fragments.project.ProjectTalentFragment"
+        android:label="fragment_project_talent"
+        tools:layout="@layout/fragment_project_talent" />
+    <fragment
+        android:id="@+id/reward_talent_nav"
+        android:name="com.capstone.ditalent.ui.talent.fragments.reward.RewardFragment"
+        android:label="fragment_reward"
+        tools:layout="@layout/fragment_reward" />
+    <fragment
+        android:id="@+id/profile_talent_nav"
+        android:name="com.capstone.ditalent.ui.talent.fragments.profile.ProfileTalentFragment"
+        android:label="fragment_profile_talent"
+        tools:layout="@layout/fragment_profile_talent" />
+</navigation>

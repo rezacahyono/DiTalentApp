@@ -55,11 +55,17 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="TextAppearance.DiTalent.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <!-- TODO: Masukin font family -->
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="TextAppearance.DiTalent.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
         <!-- TODO: Masukin font family -->
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
 
     <!-- Layout Input Text   -->
     <style name="Widget.DiTalent.LayoutInputText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">

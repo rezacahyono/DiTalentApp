@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.talent.fragments.home.HomeTalentFragment">
+
+    <View
+        android:id="@+id/frame_shape_oval"
+        android:layout_width="match_parent"
+        android:layout_height="144dp"
+        android:background="@drawable/shape_half_oval"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_name_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/root_padding"
+        android:layout_marginTop="@dimen/root_padding"
+        android:text="Hai, Annisa!"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_greeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yuk selesaikan project kamu"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@id/tv_name_user"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_user" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_title_about_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/root_padding"
+        android:layout_marginTop="16dp"
+        android:text="Tentang DiTalent"
+        android:textAppearance="@style/TextAppearance.DiTalent.Subtitle1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frame_shape_oval" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_about_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/root_padding"
+        android:layout_marginTop="8dp"
+        android:justificationMode="inter_word"
+        android:text="Lorem ipsum dolor sit amet consectetur. Et in ultrices cursus ultrices facilisi sed consectetur quisque. Ut vel pharetra enim in adipiscing. Aliquam gravida semper proin eu etiam ornare elit. Sit posuere sed congue pellentesque pharetra enim in."
+        app:layout_constraintTop_toBottomOf="@id/tv_title_about_app" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

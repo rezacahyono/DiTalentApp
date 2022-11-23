@@ -17,6 +17,13 @@
         <item name="alertDialogTheme">@style/ThemeOverlay.DiTalent.AlertDialog</item>
     </style>
 
+    <!--  Status Bar Theme  -->
+    <style name="Theme.DiTalent.StatusBar" parent="Theme.DiTalent">
+        <item name="android:statusBarColor">@color/purple</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+    </style>
+
     <!--  Splash Theme  -->
     <style name="SplashTheme.DiTalent" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@android:color/white</item>
@@ -24,4 +31,6 @@
         <item name="windowSplashScreenAnimationDuration">500</item>
         <item name="postSplashScreenTheme">@style/Theme.DiTalent</item>
     </style>
+
+
 </resources>
