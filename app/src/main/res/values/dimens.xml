@@ -23,4 +23,10 @@
 
     <dimen name="gutter_horizontal_radio_button">10dp</dimen>
     <dimen name="size_height_radio_button">38dp</dimen>
+
+    <dimen name="root_dialog_padding">50dp</dimen>
+
+    <dimen name="small_shape_rounded">8dp</dimen>
+    <dimen name="medium_shape_rounded">16dp</dimen>
+    <dimen name="large_shape_rounded">32dp</dimen>
 </resources>

@@ -1,4 +1,4 @@
-package com.capstone.ditalent.ui.activities.boarding
+package com.capstone.ditalent.ui.boarding
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,7 @@ import com.capstone.ditalent.R
 import com.capstone.ditalent.adapter.BoardingAdapter
 import com.capstone.ditalent.databinding.ActivityBoardingBinding
 import com.capstone.ditalent.model.Boarding
-import com.capstone.ditalent.ui.activities.MainActivity
+import com.capstone.ditalent.ui.auth.activities.AuthActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -100,7 +100,7 @@ class BoardingActivity : AppCompatActivity() {
     }
 
     private fun navigateToMain(route: String) {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, AuthActivity::class.java)
         intent.putExtra(ROUTE, route)
         startActivity(intent)
         finish()

@@ -1,4 +1,4 @@
-package com.capstone.ditalent.data
+package com.capstone.ditalent.data.local.preferences
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -8,16 +8,16 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class SettingPreferenceRepository @Inject constructor(
-    private val settingDataStore: DataStore<Preferences>
+class SettingPreferences @Inject constructor(
+    private val settingPreference: DataStore<Preferences>
 ) {
 
-    val isFirstRun: Flow<Boolean> = settingDataStore.data.map { preferences ->
+    val isFirstRun: Flow<Boolean> = settingPreference.data.map { preferences ->
         preferences[PreferencesKeys.FIRST_RUN_KEY] ?: true
     }
 
     suspend fun updateIsFirstRun(value: Boolean) {
-        settingDataStore.edit { preferences ->
+        settingPreference.edit { preferences ->
             preferences[PreferencesKeys.FIRST_RUN_KEY] = value
         }
     }

@@ -80,7 +80,30 @@
     <!--  ShapeAppearance  -->
     <style name="ShapeAppearance.DiTalent.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/button_rounded</item>
+        <item name="cornerSize">@dimen/small_shape_rounded</item>
+    </style>
+
+    <style name="ShapeAppearance.DiTalent.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/medium_shape_rounded</item>
+    </style>
+
+
+    <!--  Alert Dialog  -->
+    <style name="ThemeOverlay.DiTalent.AlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="dialogCornerRadius">@dimen/medium_shape_rounded</item>
+        <item name="backgroundTint">?colorBackgroundFloating</item>
+        <item name="android:background">?colorBackgroundFloating</item>
+    </style>
+
+    <style name="ThemeOverlay.DiTalent.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="backgroundTint">?colorBackgroundFloating</item>
+        <item name="android:background">?colorBackgroundFloating</item>
+        <item name="alertDialogStyle">@style/MaterialAlertDialog.DiTalent</item>
+    </style>
+
+    <style name="MaterialAlertDialog.DiTalent" parent="MaterialAlertDialog.MaterialComponents">
+        <item name="shapeAppearance">@style/ShapeAppearance.DiTalent.MediumComponent</item>
     </style>
 
 </resources>

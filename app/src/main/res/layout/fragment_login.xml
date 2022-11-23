@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/root_padding"
-    tools:context=".ui.fragments.login.LoginFragment">
+    tools:context=".ui.auth.fragments.login.LoginFragment">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_title_login"
@@ -60,8 +60,8 @@
             android:layout_height="@dimen/size_height_edt"
             android:hint="@string/hint_email"
             android:imeOptions="actionNext"
-            android:maxLines="1"
             android:inputType="textEmailAddress"
+            android:maxLines="1"
             android:padding="0dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,10 +86,10 @@
             android:id="@+id/edt_password"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_height_edt"
-            android:maxLines="1"
             android:hint="@string/hint_password"
             android:imeOptions="actionNext"
             android:inputType="textPassword"
+            android:maxLines="1"
             android:padding="0dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -100,9 +100,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/gutter_layout_text"
         android:text="@string/forgot_password"
-        app:layout_constraintEnd_toEndOf="parent"
         android:textAlignment="textEnd"
         android:textAppearance="@style/TextAppearance.DiTalent.Button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_edt_password" />
 
 
@@ -120,12 +120,15 @@
         android:id="@+id/tv_title_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_button_login_register_top"
         android:text="@string/dont_have_a_account"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tv_register"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_login"
+        app:layout_constraintVertical_bias="1.0" />
 
 
     <com.google.android.material.textview.MaterialTextView
@@ -133,9 +136,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/gutter_layout_text"
-        android:text="@string/sign_up"
         android:clickable="true"
         android:focusable="true"
+        android:text="@string/sign_up"
         android:textAppearance="@style/TextAppearance.DiTalent.Button"
         android:textColor="@color/orange"
         app:layout_constraintBaseline_toBaselineOf="@id/tv_title_register"

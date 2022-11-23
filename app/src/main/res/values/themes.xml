@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base Theme   -->
-    <style name="Theme.DiTalent" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.DiTalent" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:colorBackground">@color/white</item>
         <item name="colorPrimary">@color/purple</item>
@@ -12,11 +12,14 @@
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:textColorSecondary">@color/textColorSecondary</item>
         <item name="colorSurface">@color/white</item>
+
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.DiTalent.MaterialAlertDialog</item>
+        <item name="alertDialogTheme">@style/ThemeOverlay.DiTalent.AlertDialog</item>
     </style>
 
     <!--  Splash Theme  -->
     <style name="SplashTheme.DiTalent" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenBackground">@android:color/white</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_screen_logo</item>
         <item name="windowSplashScreenAnimationDuration">500</item>
         <item name="postSplashScreenTheme">@style/Theme.DiTalent</item>
