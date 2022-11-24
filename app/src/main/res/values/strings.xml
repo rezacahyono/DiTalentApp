@@ -99,5 +99,10 @@
     <string name="item_progress">Project Terselesaikan</string>
     <string name="contentDescIvReward">Image Detail Reward for Illustration</string>
     <string name="contentDescIcBack">icon for back</string>
+    <string name="contentDescImageProject">Project Image Ilustration</string>
+    <string name="periode_project">Periode Project</string>
+    <string name="date_project_periode">15 Oktober - 31 Oktober</string>
+    <string name="company">PT ZENIUS INDONESIA</string>
+    <string name="desc_project_min">Video Pembelajaran</string>
 
 </resources>
