@@ -76,7 +76,7 @@
     <string name="points_needs">Point Needs</string>
     <string name="desc_point_needs">Membutuhkan 200 Point Penukaran.</string>
     <string name="desc">Deskripsi</string>
-    <string name="reward_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</string>
+    <string name="desc_loremipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</string>
     <string name="SnK">Syarat &amp; Ketentuan</string>
     <string name="SnK_desc">- Hanya dapat di claim satu kali \n- Memiliki masa aktif 7 hari setelah claim \n- Tidak dapat diperjual Belikan</string>
 
@@ -93,5 +93,11 @@
     <string name="confirmation_success_reward_title">Selamat</string>
     <string name="confirmation_success_reward_desc">Reward Anda telah diaktifkan</string>
     <string name="content_desc_confirmation">ilustration for confrimation</string>
+
+    <!-- Home Influencer    -->
+    <string name="item_count_reward">8</string>
+    <string name="item_progress">Project Terselesaikan</string>
+    <string name="contentDescIvReward">Image Detail Reward for Illustration</string>
+    <string name="contentDescIcBack">icon for back</string>
 
 </resources>

@@ -21,7 +21,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_back"
             android:clickable="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:contentDescription="@string/contentDescIcBack" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,7 +45,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        android:background="@drawable/cat" />
+        android:background="@drawable/cat"
+        android:contentDescription="@string/contentDescIvReward" />
 
     <TextView
         android:id="@+id/tv_point_needs"
@@ -92,7 +94,7 @@
         android:layout_marginHorizontal="26dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/lexend"
-        android:text="@string/reward_desc"
+        android:text="@string/desc_loremipsum"
         android:textColor="@color/textColorPrimary"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
