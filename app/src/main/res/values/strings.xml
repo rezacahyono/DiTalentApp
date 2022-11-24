@@ -64,5 +64,33 @@
     <string name="profil">Profile</string>
     <string name="chart">Chart</string>
 
+    <!--  Reward  -->
+    <string name="reward_title">Reward Saya</string>
+    <string name="total_points">Total Point Aktif</string>
+    <string name="points">0</string>
+    <string name="special_reward">Special Reward</string>
+
+
+    <!-- Detail Reward   -->
+    <string name="reward_title_detail">Detail Reward</string>
+    <string name="points_needs">Point Needs</string>
+    <string name="desc_point_needs">Membutuhkan 200 Point Penukaran.</string>
+    <string name="desc">Deskripsi</string>
+    <string name="reward_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</string>
+    <string name="SnK">Syarat &amp; Ketentuan</string>
+    <string name="SnK_desc">- Hanya dapat di claim satu kali \n- Memiliki masa aktif 7 hari setelah claim \n- Tidak dapat diperjual Belikan</string>
+
+
+    <!--  cta  -->
+    <string name="cta_more">Selengkapnya</string>
+
+    <!-- btn -->
+    <string name="btn_claim">Claim</string>
+    <string name="btn_selesai">Selesai</string>
+
+    <!-- Confirmation   -->
+    <string name="confirmation_success">Success Confirmation</string>
+    <string name="confirmation_success_reward_title">Selamat</string>
+    <string name="confirmation_success_reward_desc">Reward Anda telah diaktifkan</string>
 
 </resources>

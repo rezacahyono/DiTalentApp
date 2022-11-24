@@ -40,7 +40,7 @@
     <!--  Text Appearance  -->
     <style name="TextAppearance.DiTalent.Button" parent="TextAppearance.MaterialComponents.Button">
         <item name="textAllCaps">false</item>
-        <!-- TODO: Masukin font family -->
+        <item name="fontFamily">@font/lexend_bold</item>
         <item name="android:textSize">14sp</item>
     </style>
 
