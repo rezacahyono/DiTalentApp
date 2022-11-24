@@ -92,5 +92,6 @@
     <string name="confirmation_success">Success Confirmation</string>
     <string name="confirmation_success_reward_title">Selamat</string>
     <string name="confirmation_success_reward_desc">Reward Anda telah diaktifkan</string>
+    <string name="content_desc_confirmation">ilustration for confrimation</string>
 
 </resources>
