@@ -18,6 +18,7 @@ class RewardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRewardBinding.inflate(layoutInflater, container, false)
+        binding.layoutToolbar.toolbar.title = getString(R.string.reward)
         return binding.root
     }
 

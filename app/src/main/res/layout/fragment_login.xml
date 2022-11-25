@@ -122,7 +122,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_button_login_register_top"
         android:text="@string/dont_have_a_account"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+        android:textAppearance="@style/TextAppearance.DiTalent.Caption"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tv_register"
         app:layout_constraintHorizontal_chainStyle="packed"

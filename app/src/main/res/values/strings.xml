@@ -95,14 +95,19 @@
     <string name="content_desc_confirmation">ilustration for confrimation</string>
 
     <!-- Home Influencer    -->
-    <string name="item_count_reward">8</string>
-    <string name="item_progress">Project Terselesaikan</string>
-    <string name="contentDescIvReward">Image Detail Reward for Illustration</string>
-    <string name="contentDescIcBack">icon for back</string>
-    <string name="contentDescImageProject">Project Image Ilustration</string>
+    <string name="greeting_user">Hai👋, %s!</string>
+    <string name="content_desc_iv_reward">Gambar detail rewards</string>
+    <string name="content_desc_iv_back">Icon untuk kembali</string>
+    <string name="content_desc_iv_project">Gambar project</string>
+    <string name="about_app">Tentang DiTalent</string>
+
+    <!--  Text Dummy  -->
+    <string name="yuk_selesaikan_project_kamu">Yuk selesaikan project kamu</string>
     <string name="periode_project">Periode Project</string>
     <string name="date_project_periode">15 Oktober - 31 Oktober</string>
     <string name="company">PT ZENIUS INDONESIA</string>
     <string name="desc_project_min">Video Pembelajaran</string>
+    <string name="item_count_reward">8</string>
+    <string name="item_progress">Project Terselesaikan</string>
 
 </resources>

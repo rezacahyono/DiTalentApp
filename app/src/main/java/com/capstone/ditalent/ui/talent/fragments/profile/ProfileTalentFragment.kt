@@ -18,6 +18,7 @@ class ProfileTalentFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProfileTalentBinding.inflate(layoutInflater, container, false)
+        binding.layoutToolbar.toolbar.title = getString(R.string.profil)
         return binding.root
     }
 

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.capstone.ditalent.R
 import com.capstone.ditalent.databinding.FragmentProjectTalentBinding
 
 class ProjectTalentFragment : Fragment() {
@@ -16,6 +17,7 @@ class ProjectTalentFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProjectTalentBinding.inflate(layoutInflater, container, false)
+        binding.layoutToolbar.toolbar.title = getString(R.string.project)
         return binding.root
     }
 

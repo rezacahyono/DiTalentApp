@@ -14,12 +14,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_name_user"
+        android:id="@+id/tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/root_padding"
         android:layout_marginTop="@dimen/root_padding"
-        android:text="Hai, Annisa!"
+        android:text="@string/greeting_user"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,23 +29,20 @@
         android:id="@+id/tv_greeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Yuk selesaikan project kamu"
+        android:text="@string/yuk_selesaikan_project_kamu"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@id/tv_name_user"
-        app:layout_constraintTop_toBottomOf="@id/tv_name_user" />
+        app:layout_constraintStart_toStartOf="@id/tv_username"
+        app:layout_constraintTop_toBottomOf="@id/tv_username" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_title_about_app"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/root_padding"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/lexend_bold"
-        android:text="Tentang DiTalent"
+        android:layout_marginTop="@dimen/root_medium_margin"
+        android:text="@string/about_app"
         android:textAppearance="@style/TextAppearance.DiTalent.Subtitle1"
-        android:textColor="@color/textColorPrimary"
-        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/frame_shape_oval" />
 
@@ -54,39 +51,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/root_padding"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/lexend"
+        android:layout_marginTop="@dimen/root_small_margin"
         android:justificationMode="inter_word"
         android:text="@string/desc_loremipsum"
-        android:textColor="@color/textColorPrimary"
-        android:textSize="12sp"
+        android:textAppearance="@style/TextAppearance.DiTalent.Caption"
         app:layout_constraintTop_toBottomOf="@id/tv_title_about_app" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider_1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_divider"
+        android:layout_marginTop="@dimen/divider_margin"
+        app:layout_constraintTop_toBottomOf="@id/tv_about_app" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_reward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/lexend_bold"
-        android:justificationMode="inter_word"
+        android:layout_marginStart="@dimen/root_padding"
+        android:layout_marginTop="@dimen/divider_margin"
         android:text="@string/reward"
-        android:textColor="@color/textColorPrimary"
-        android:textSize="16sp"
+        android:textAppearance="@style/TextAppearance.DiTalent.Subtitle1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_about_app" />
+        app:layout_constraintTop_toBottomOf="@id/divider_1" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_cta_reward_more"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:justificationMode="inter_word"
+        style="@style/Widget.DiTalent.Text.Cta"
+        android:layout_marginEnd="@dimen/root_padding"
         android:text="@string/cta_more"
-        android:textColor="@color/purple"
-        app:layout_constraintBottom_toBottomOf="@id/tv_reward"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_reward" />
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_reward"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_reward_progress"
@@ -99,40 +94,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_reward"
+        android:clipToPadding="false"
         tools:listitem="@layout/item_reward_progress" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider_2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_divider"
+        android:layout_marginTop="@dimen/divider_margin"
+        app:layout_constraintTop_toBottomOf="@id/rv_reward_progress" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_project"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/lexend_bold"
-        android:justificationMode="inter_word"
+        android:layout_marginStart="@dimen/root_padding"
+        android:layout_marginTop="@dimen/divider_margin"
+        android:textAppearance="@style/TextAppearance.DiTalent.Subtitle1"
         android:text="@string/project"
-        android:textColor="@color/textColorPrimary"
-        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_reward_progress" />
+        app:layout_constraintTop_toBottomOf="@id/divider_2" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_cta_project_more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:justificationMode="inter_word"
+        android:layout_marginEnd="@dimen/root_padding"
         android:text="@string/cta_more"
-        android:textColor="@color/purple"
-        app:layout_constraintBottom_toBottomOf="@id/tv_project"
+        style="@style/Widget.DiTalent.Text.Cta"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_project" />
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_project" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_project"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:paddingHorizontal="24dp"
+        android:layout_marginTop="@dimen/root_small_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_project"

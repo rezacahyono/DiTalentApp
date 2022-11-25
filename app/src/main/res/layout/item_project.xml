@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="138dp"
             android:background="@drawable/cat"
-            android:contentDescription="@string/contentDescImageProject"
+            android:contentDescription="@string/content_desc_iv_project"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

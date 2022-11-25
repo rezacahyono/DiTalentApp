@@ -10,7 +10,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.capstone.ditalent.R
 import com.capstone.ditalent.databinding.ActivityTalentBinding
 import com.capstone.ditalent.utils.Utilities.margin
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TalentActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTalentBinding
     private lateinit var navController: NavController

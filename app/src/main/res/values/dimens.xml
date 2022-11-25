@@ -2,6 +2,8 @@
 <resources>
 
     <dimen name="root_padding">24dp</dimen>
+    <dimen name="root_medium_margin">16dp</dimen>
+    <dimen name="root_small_margin">8dp</dimen>
     <dimen name="margin_vertical_button_slide">16dp</dimen>
     <dimen name="margin_vertical_text_slide">16dp</dimen>
 
@@ -31,4 +33,6 @@
     <dimen name="large_shape_rounded">32dp</dimen>
 
     <dimen name="frame_margin_bottom">56dp</dimen>
+    <dimen name="size_divider">4dp</dimen>
+    <dimen name="divider_margin">20dp</dimen>
 </resources>
