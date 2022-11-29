@@ -147,23 +147,23 @@
             android:id="@+id/layout_edt_no_phone"
             style="@style/Widget.DiTalent.LayoutInputText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/size_height_edt"
             android:layout_marginTop="@dimen/margin_layout_text_to_title"
-            app:expandedHintEnabled="false"
             app:layout_constraintTop_toBottomOf="@id/tv_title_no_phone"
             app:prefixText="@string/prefix_no_phone"
+            app:expandedHintEnabled="false"
             app:prefixTextAppearance="@style/TextAppearance.DiTalent.Subtitle2"
             app:prefixTextColor="@color/orange">
 
             <com.capstone.ditalent.component.InputText
                 android:id="@+id/edt_no_phone"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/size_height_edt"
+                android:layout_height="match_parent"
                 android:hint="@string/hint_no_phone"
                 android:imeOptions="actionNext"
                 android:inputType="phone"
-                android:maxLines="1"
-                android:padding="15dp" />
+                android:padding="13dp"
+                android:maxLines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textview.MaterialTextView
