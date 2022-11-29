@@ -1,5 +1,6 @@
 package com.capstone.ditalent.data.repository.auth
 
+import android.util.Log
 import com.capstone.ditalent.data.local.preferences.UserPreferences
 import com.capstone.ditalent.data.remote.data_source.UserRemoteDataSource
 import com.capstone.ditalent.data.remote.dto.auth.RequestUser
@@ -53,6 +54,7 @@ class UserRepositoryImpl @Inject constructor(
                 emit(result)
             }
             is ApiResult.ApiError -> {
+                Log.d("TAG", "register: ${source.uiText}")
                 val result = mapOf(false to source.uiText)
                 emit(result)
             }

@@ -51,7 +51,7 @@ class TalentActivity : AppCompatActivity() {
                 }
                 else -> {
                     binding.fragmentContainerTalent.margin(bottom = 0f)
-                    bottomNav.isVisible = true
+                    bottomNav.isVisible = false
                 }
             }
         }

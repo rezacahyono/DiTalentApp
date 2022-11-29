@@ -2,24 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/home_nav"
+        android:id="@+id/home_umkm_nav"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_home"
         android:title="@string/home" />
     <item
-        android:id="@+id/project_nav"
+        android:id="@+id/project_umkm_nav"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_project"
         android:title="@string/project" />
 
     <item
-        android:id="@+id/chart_nav"
+        android:id="@+id/chart_umkm_nav"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_chart"
         android:title="@string/chart" />
 
     <item
-        android:id="@+id/profile_nav"
+        android:id="@+id/profile_umkm_nav"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_profile"
         android:title="@string/profil" />

@@ -11,13 +11,13 @@ import retrofit2.http.POST
 interface DitalentApi {
 
     @FormUrlEncoded
-    @POST("login")
+    @POST("auth/login")
     suspend fun login(
         @Field("email") email: String,
         @Field("password") password: String
     ): Response<ResponseUser>
 
-    @POST("register")
+    @POST("auth/register")
     suspend fun register(
         @Body requestUser: RequestUser
     ): Response<ResponseUser>

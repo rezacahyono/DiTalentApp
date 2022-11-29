@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/umkm_nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/umkm_nav_graph"
+    app:startDestination="@id/home_umkm_nav">
+
+    <fragment
+        android:id="@+id/home_umkm_nav"
+        android:name="com.capstone.ditalent.ui.umkm.fragments.home.HomeUmkmFragment"
+        android:label="fragment_home_umkm"
+        tools:layout="@layout/fragment_home_umkm" />
+
+    <fragment
+        android:id="@+id/project_umkm_nav"
+        android:name="com.capstone.ditalent.ui.umkm.fragments.project.ProjectUmkmFragment"
+        android:label="fragment_project_umkm"
+        tools:layout="@layout/fragment_project_umkm" />
+
+    <fragment
+        android:id="@+id/chart_umkm_nav"
+        android:name="com.capstone.ditalent.ui.umkm.fragments.chart.ChartFragment"
+        android:label="fragment_chart"
+        tools:layout="@layout/fragment_chart" />
+
+    <fragment
+        android:id="@+id/profile_umkm_nav"
+        android:name="com.capstone.ditalent.ui.umkm.fragments.profile.ProfileUmkmFragment"
+        android:label="fragment_profile_umkm"
+        tools:layout="@layout/fragment_profile_umkm" />
 
 </navigation>

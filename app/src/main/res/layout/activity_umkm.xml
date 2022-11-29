@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.umkm.activities.UmkmActivity">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container_umkm"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        android:layout_marginBottom="@dimen/frame_margin_bottom"
+        app:navGraph="@navigation/umkm_nav_graph" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_umkm"
