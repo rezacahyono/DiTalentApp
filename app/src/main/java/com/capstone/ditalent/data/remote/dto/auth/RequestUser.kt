@@ -5,8 +5,8 @@ import java.io.File
 
 data class RequestUser(
 
-    @SerializedName("name")
-    val name: String,
+    @SerializedName("username")
+    val username: String,
 
     @SerializedName("email")
     val email: String,

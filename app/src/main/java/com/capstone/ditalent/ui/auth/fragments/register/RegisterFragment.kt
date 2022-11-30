@@ -117,7 +117,7 @@ class RegisterFragment : Fragment() {
 
         if (registerCorrect) {
             val requestUser = RequestUser(
-                name = name,
+                username = name,
                 email = email,
                 role = role.toString(),
                 noPhone = noPhone.clearNoPhone(),

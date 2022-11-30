@@ -1,32 +1,46 @@
 package com.capstone.ditalent.ui.talent.fragments.reward.detail
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.capstone.ditalent.R
+import com.capstone.ditalent.databinding.FragmentRewardDetailBinding
+
 
 class RewardDetailFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = RewardDetailFragment()
-    }
-
-    private lateinit var viewModel: RewardDetailViewModel
-
+    private var _binding: FragmentRewardDetailBinding? = null
+    private val binding get() = _binding as FragmentRewardDetailBinding
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_reward_detail, container, false)
+    ): View {
+        _binding = FragmentRewardDetailBinding.inflate(layoutInflater, container, false)
+        binding.layoutToolbar.toolbar.apply {
+            title = getString(R.string.reward)
+            navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_arrow_back)
+            setNavigationOnClickListener { navigateToBack() }
+        }
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RewardDetailViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun navigateToBack(){
+        findNavController().navigateUp()
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

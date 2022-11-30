@@ -9,29 +9,42 @@
     <View
         android:id="@+id/frame_shape_oval"
         android:layout_width="match_parent"
-        android:layout_height="144dp"
-        android:background="@drawable/shape_half_oval"
+        android:layout_height="184dp"
+        android:background="@drawable/shape_wave"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_greeting_talent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/image_greeting_talent"
+        android:src="@drawable/ic_greeting_talent"
+        app:layout_constraintEnd_toEndOf="@id/frame_shape_oval"
+        app:layout_constraintTop_toBottomOf="@id/tv_username" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_username"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/root_padding"
         android:layout_marginTop="@dimen/root_padding"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:text="@string/greeting_user"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textAppearance="@style/TextAppearance.DiTalent.Headline6"
         android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_greeting"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/yuk_selesaikan_project_kamu"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/tv_username"
         app:layout_constraintStart_toStartOf="@id/tv_username"
         app:layout_constraintTop_toBottomOf="@id/tv_username" />
 
@@ -40,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/root_padding"
-        android:layout_marginTop="@dimen/root_medium_margin"
+        android:layout_marginTop="@dimen/root_padding"
         android:text="@string/about_app"
         android:textAppearance="@style/TextAppearance.DiTalent.Subtitle1"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,13 +101,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
+        android:clipToPadding="false"
         android:orientation="horizontal"
         android:paddingHorizontal="24dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_reward"
-        android:clipToPadding="false"
         tools:listitem="@layout/item_reward_progress" />
 
     <com.google.android.material.divider.MaterialDivider
@@ -110,20 +123,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/root_padding"
         android:layout_marginTop="@dimen/divider_margin"
-        android:textAppearance="@style/TextAppearance.DiTalent.Subtitle1"
         android:text="@string/project"
+        android:textAppearance="@style/TextAppearance.DiTalent.Subtitle1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider_2" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_cta_project_more"
+        style="@style/Widget.DiTalent.Text.Cta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/root_padding"
         android:text="@string/cta_more"
-        style="@style/Widget.DiTalent.Text.Cta"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBaseline_toBaselineOf="@id/tv_project" />
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_project"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_project"

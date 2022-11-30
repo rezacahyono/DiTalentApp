@@ -115,6 +115,19 @@ object Utilities {
         }
     }
 
+    fun String.getInitialName(): String {
+        if (this.isEmpty()) return ""
+        val stringBuilder = StringBuilder()
+        val split = this.split(" ")
+        for ((index, s) in split.withIndex()) {
+            stringBuilder.append(s.first())
+            if (index >= 1) {
+                break
+            }
+        }
+        return stringBuilder.toString()
+    }
+
     fun View.margin(
         left: Float? = null,
         top: Float? = null,

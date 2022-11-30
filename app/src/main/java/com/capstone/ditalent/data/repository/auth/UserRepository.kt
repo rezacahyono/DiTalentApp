@@ -2,6 +2,7 @@ package com.capstone.ditalent.data.repository.auth
 
 import com.capstone.ditalent.data.remote.dto.auth.RequestUser
 import com.capstone.ditalent.model.User
+import com.capstone.ditalent.utils.Result
 import com.capstone.ditalent.utils.UiText
 import kotlinx.coroutines.flow.Flow
 
@@ -14,5 +15,7 @@ interface UserRepository {
     fun login(email: String, password: String): Flow<Map<Boolean, UiText>>
 
     fun register(requestUser: RequestUser): Flow<Map<Boolean, UiText>>
+
+    fun getMe(): Flow<Result<User>>
 
 }

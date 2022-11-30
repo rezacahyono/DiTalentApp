@@ -99,16 +99,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_snk" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_claim"
+        style="@style/Widget.DiTalent.Button.Filled"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginHorizontal="26dp"
-        android:layout_marginVertical="12dp"
-        android:fontFamily="@font/lexend_bold"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/root_padding"
+        android:layout_marginBottom="@dimen/root_padding"
         android:text="@string/btn_claim"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

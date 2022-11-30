@@ -64,6 +64,10 @@ dependencies {
     // Splash screen
     implementation "androidx.core:core-splashscreen:$splash_version"
 
+    // Coil image
+    implementation "io.coil-kt:coil:2.2.2"
+    implementation "io.getstream:avatarview-coil:1.0.7"
+
     // Dots indicator
     implementation "com.tbuonomo:dotsindicator:4.3"
 

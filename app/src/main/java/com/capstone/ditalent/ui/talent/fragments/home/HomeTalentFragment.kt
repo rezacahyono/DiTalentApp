@@ -1,12 +1,12 @@
 package com.capstone.ditalent.ui.talent.fragments.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.capstone.ditalent.R
 import com.capstone.ditalent.databinding.FragmentHomeTalentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,9 +32,24 @@ class HomeTalentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homeTalentViewModel.userPref.observe(viewLifecycleOwner){ user ->
-            binding.tvUsername.text = getString(R.string.greeting_user, user.name)
+        homeTalentViewModel.userPref.observe(viewLifecycleOwner) { user ->
+            binding.tvUsername.text = getString(R.string.greeting_user, user.username)
         }
+
+        binding.apply {
+            tvCtaRewardMore.setOnClickListener { navigateToReward() }
+            tvCtaProjectMore.setOnClickListener { navigateToProject() }
+        }
+    }
+
+    private fun navigateToReward() {
+        val directions = HomeTalentFragmentDirections.actionHomeTalentNavToRewardTalentNav()
+        findNavController().navigate(directions)
+    }
+
+    private fun navigateToProject() {
+        val directions = HomeTalentFragmentDirections.actionHomeTalentNavToProjectTalentNav()
+        findNavController().navigate(directions)
     }
 
     override fun onDestroyView() {
@@ -42,7 +57,4 @@ class HomeTalentFragment : Fragment() {
         _binding = null
     }
 
-    private companion object {
-        private val TAG = HomeTalentFragment::class.java.simpleName
-    }
 }

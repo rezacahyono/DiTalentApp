@@ -35,4 +35,10 @@
     <dimen name="frame_margin_bottom">56dp</dimen>
     <dimen name="size_divider">4dp</dimen>
     <dimen name="divider_margin">20dp</dimen>
+
+    <dimen name="size_image_circle">84dp</dimen>
+
+    <dimen name="margin_small_text_profile">4dp</dimen>
+    <dimen name="margin_medium_text_profile">8dp</dimen>
+    <dimen name="margin_large_text_profile">16dp</dimen>
 </resources>

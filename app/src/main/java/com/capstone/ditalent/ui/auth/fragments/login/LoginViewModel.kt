@@ -1,5 +1,6 @@
 package com.capstone.ditalent.ui.auth.fragments.login
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -29,15 +30,16 @@ class LoginViewModel @Inject constructor(
                 LoginUiState(
                     isSuccess = result.keys.first(),
                     isError = !result.keys.first(),
-                    messageError = result.values.first()
+                    errorMessage = result.values.first()
                 )
             }
             .onStart { emit(LoginUiState(isLoading = true)) }
-            .catch {
+            .catch {exception ->
+                Log.d("TAG", "setupToLogin: ${exception.message}")
                 emit(
                     LoginUiState(
                         isError = true,
-                        messageError = UiText.DynamicString("Error")
+                        errorMessage = UiText.DynamicString("Error")
                     )
                 )
             }

@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:itemRippleColor="#107F52FF"
         app:menu="@menu/talent_bottom_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

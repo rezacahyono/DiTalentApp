@@ -11,10 +11,12 @@ class UserRemoteDataSource @Inject constructor(
     suspend fun login(
         email: String,
         password: String
-    ) = handleApi { ditalentApi.login(email, password) }
+    ) = handleApi { ditalentApi.login(email = email, password = password) }
 
     suspend fun register(
         requestUser: RequestUser
-    ) = handleApi { ditalentApi.register(requestUser) }
+    ) = handleApi { ditalentApi.register(requestUser = requestUser) }
 
+
+    suspend fun getMe(token: String) = handleApi { ditalentApi.getMe(token = token) }
 }

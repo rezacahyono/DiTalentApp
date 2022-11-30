@@ -1,6 +1,7 @@
 package com.capstone.ditalent.ui.auth.fragments.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -73,6 +74,7 @@ class LoginFragment : Fragment() {
 
         if (loginCorrect) {
             loginViewModel.login(email, password).observe(viewLifecycleOwner) { state ->
+                Log.d("TAG", "setupToLogin: $state")
                 when {
                     state.isSuccess -> {
                         loadingDialog.hideDialog()

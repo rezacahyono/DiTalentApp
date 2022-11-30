@@ -9,7 +9,14 @@
         android:id="@+id/home_talent_nav"
         android:name="com.capstone.ditalent.ui.talent.fragments.home.HomeTalentFragment"
         android:label="fragment_home_talent"
-        tools:layout="@layout/fragment_home_talent" />
+        tools:layout="@layout/fragment_home_talent">
+        <action
+            android:id="@+id/action_home_talent_nav_to_reward_talent_nav"
+            app:destination="@id/reward_talent_nav" />
+        <action
+            android:id="@+id/action_home_talent_nav_to_project_talent_nav"
+            app:destination="@id/project_talent_nav" />
+    </fragment>
     <fragment
         android:id="@+id/project_talent_nav"
         android:name="com.capstone.ditalent.ui.talent.fragments.project.ProjectTalentFragment"
@@ -19,10 +26,19 @@
         android:id="@+id/reward_talent_nav"
         android:name="com.capstone.ditalent.ui.talent.fragments.reward.RewardFragment"
         android:label="fragment_reward"
-        tools:layout="@layout/fragment_reward" />
+        tools:layout="@layout/fragment_reward" >
+        <action
+            android:id="@+id/action_reward_talent_nav_to_reward_detail_nav"
+            app:destination="@id/reward_detail_nav" />
+    </fragment>
     <fragment
         android:id="@+id/profile_talent_nav"
         android:name="com.capstone.ditalent.ui.talent.fragments.profile.ProfileTalentFragment"
         android:label="fragment_profile_talent"
         tools:layout="@layout/fragment_profile_talent" />
+    <fragment
+        android:id="@+id/reward_detail_nav"
+        android:name="com.capstone.ditalent.ui.talent.fragments.reward.detail.RewardDetailFragment"
+        android:label="fragment_reward_detail"
+        tools:layout="@layout/fragment_reward_detail" />
 </navigation>

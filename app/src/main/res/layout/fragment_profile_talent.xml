@@ -21,6 +21,70 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <io.getstream.avatarview.AvatarView
+                android:id="@+id/iv_avatar"
+                android:layout_width="@dimen/size_image_circle"
+                android:layout_height="@dimen/size_image_circle"
+                android:layout_marginStart="@dimen/root_padding"
+                android:layout_marginTop="@dimen/root_padding"
+                app:avatarViewInitialsBackgroundColor="@color/orange_light"
+                app:avatarViewInitialsTextColor="@color/white"
+                app:avatarViewInitialsTextSize="21sp"
+                app:avatarViewInitialsTextSizeRatio="0.33"
+                app:avatarViewInitialsTextStyle="bold"
+                app:avatarViewShape="circle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_fullname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/root_medium_margin"
+                android:layout_marginEnd="@dimen/root_padding"
+                android:textAppearance="@style/TextAppearance.DiTalent.Subtitle1"
+                app:layout_constraintBottom_toTopOf="@id/tv_username"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_avatar"
+                app:layout_constraintTop_toTopOf="@id/iv_avatar"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="@tools:sample/full_names" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_username"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/root_medium_margin"
+                android:layout_marginTop="@dimen/margin_small_text_profile"
+                android:layout_marginEnd="@dimen/root_padding"
+                android:textAppearance="@style/TextAppearance.DiTalent.Subtitle2"
+                android:textColor="@color/purple"
+                app:layout_constraintBottom_toTopOf="@id/tv_about_user"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_avatar"
+                app:layout_constraintTop_toBottomOf="@id/tv_fullname"
+                tools:text="@tools:sample/last_names" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_about_user"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/root_medium_margin"
+                android:layout_marginTop="@dimen/margin_small_text_profile"
+                android:layout_marginEnd="@dimen/root_padding"
+                app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_avatar"
+                app:layout_constraintTop_toBottomOf="@id/tv_username"
+                tools:text="20 Tahun | Jakarta" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_influence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/root_padding"
+                android:layout_marginTop="@dimen/root_small_margin"
+                app:layout_constraintTop_toBottomOf="@id/iv_avatar"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

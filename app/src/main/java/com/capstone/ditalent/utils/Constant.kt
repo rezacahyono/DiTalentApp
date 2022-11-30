@@ -10,4 +10,8 @@ object Constant {
 
     const val SETTING_PREFERENCE = "setting_preference"
     const val USER_PREF = "user_pref.json"
+
+    const val ACCEPT = "application/json"
+
+    const val TOKEN = "Bearer "
 }

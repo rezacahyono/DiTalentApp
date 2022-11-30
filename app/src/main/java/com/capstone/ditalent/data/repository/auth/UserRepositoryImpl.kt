@@ -1,18 +1,19 @@
 package com.capstone.ditalent.data.repository.auth
 
 import android.util.Log
+import com.capstone.ditalent.data.clearUser
 import com.capstone.ditalent.data.local.preferences.UserPreferences
 import com.capstone.ditalent.data.remote.data_source.UserRemoteDataSource
 import com.capstone.ditalent.data.remote.dto.auth.RequestUser
 import com.capstone.ditalent.data.toUser
 import com.capstone.ditalent.model.User
 import com.capstone.ditalent.utils.ApiResult
+import com.capstone.ditalent.utils.Constant.TOKEN
+import com.capstone.ditalent.utils.Result
 import com.capstone.ditalent.utils.UiText
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -26,7 +27,7 @@ class UserRepositoryImpl @Inject constructor(
         get() = userPreferences.userPref.flowOn(ioDispatcher)
 
     override suspend fun setUserpref(user: User) {
-        withContext(ioDispatcher){
+        withContext(ioDispatcher) {
             userPreferences.setUserPref(user)
         }
     }
@@ -37,6 +38,7 @@ class UserRepositoryImpl @Inject constructor(
                 val message = source.data.message
                 val result = mapOf(true to UiText.DynamicString(message))
                 emit(result)
+                Log.d("TAG", "login: ${source.data.toUser().copy(isLogin = true)}")
                 userPreferences.setUserPref(source.data.toUser().copy(isLogin = true))
             }
             is ApiResult.ApiError -> {
@@ -60,6 +62,23 @@ class UserRepositoryImpl @Inject constructor(
             }
         }
     }.flowOn(ioDispatcher)
+
+    override fun getMe(): Flow<Result<User>> = flow {
+
+        val userPref = userPref.first()
+        val token = TOKEN.plus(userPref.token)
+
+        when (val source = userRemoteDataSource.getMe(token)) {
+            is ApiResult.ApiSuccess -> {
+                val result = source.data.toUser()
+                emit(Result.Success(result))
+            }
+            is ApiResult.ApiError -> {
+                val result = source.uiText
+                emit(Result.Error(result))
+            }
+        }
+    }.onStart { emit(Result.Loading) }.flowOn(ioDispatcher)
 
 
 }

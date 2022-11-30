@@ -1,29 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/item_reward"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.DiTalent.Card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/root_padding"
-    android:layout_marginVertical="@dimen/root_small_margin"
-    android:backgroundTint="@color/textColorSecondary"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="0dp"
-    app:strokeWidth="4dp">
+    android:layout_marginVertical="@dimen/root_small_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/iv_reward"
+            android:id="@+id/iv_banner_reward"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@drawable/cat"
+            android:contentDescription="@string/image_reward"
             android:scaleType="centerCrop"
+            android:src="@drawable/cat"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/frame_tv_title_reward"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#68000000"
+            app:layout_constraintBottom_toBottomOf="@id/tv_title_reward"
+            app:layout_constraintTop_toTopOf="@id/tv_title_reward" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title_reward"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/root_medium_margin"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.DiTalent.Subtitle1"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/iv_banner_reward"
+            tools:text="Dana" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

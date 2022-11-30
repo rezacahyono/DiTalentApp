@@ -3,6 +3,7 @@ package com.capstone.ditalent.data.remote.dto.auth
 import com.google.gson.annotations.SerializedName
 
 data class UserDto(
+
     @SerializedName("role")
     val role: String,
 
@@ -10,16 +11,16 @@ data class UserDto(
     val address: String? = null,
 
     @SerializedName("updated_at")
-    val updatedAt: String,
+    val updatedAt: String? = null,
 
-    @SerializedName("name")
-    val name: String,
+    @SerializedName("talent")
+    val talentDto: TalentDto? = null,
 
     @SerializedName("created_at")
-    val createdAt: String,
+    val createdAt: String? = null,
 
     @SerializedName("id")
-    val id: Int,
+    val id: Int? = null,
 
     @SerializedName("avatar")
     val avatar: String? = null,
@@ -28,5 +29,11 @@ data class UserDto(
     val noPhone: String,
 
     @SerializedName("email")
-    val email: String
+    val email: String,
+
+    @SerializedName("username")
+    val username: String,
+
+    @SerializedName("social_media")
+    val socialMediaDto: List<SocialMediaDto>? = emptyList()
 )
