@@ -15,24 +15,10 @@
             app:destination="@id/register_nav" />
     </fragment>
 
-<!--    <action-->
-<!--        android:id="@+id/action_to_login_nav"-->
-<!--        app:destination="@id/login_nav"-->
-<!--        app:popUpTo="@id/main_nav_graph"-->
-<!--        app:popUpToInclusive="true" />-->
-
     <fragment
         android:id="@+id/register_nav"
         android:name="com.capstone.ditalent.ui.auth.fragments.register.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
-
-
-    <action
-        android:id="@+id/action_to_register"
-        app:destination="@id/register_nav"
-        app:popUpTo="@id/auth_nav_graph"
-        app:popUpToInclusive="true" />
-
 
 </navigation>

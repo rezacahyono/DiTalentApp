@@ -29,7 +29,7 @@
                 android:layout_marginTop="@dimen/root_padding"
                 app:avatarViewInitialsBackgroundColor="@color/orange_light"
                 app:avatarViewInitialsTextColor="@color/white"
-                app:avatarViewInitialsTextSize="21sp"
+                app:avatarViewInitialsTextSize="36sp"
                 app:avatarViewInitialsTextSizeRatio="0.33"
                 app:avatarViewInitialsTextStyle="bold"
                 app:avatarViewShape="circle"
@@ -84,7 +84,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/root_padding"
                 android:layout_marginTop="@dimen/root_small_margin"
-                app:layout_constraintTop_toBottomOf="@id/iv_avatar"/>
+                app:layout_constraintTop_toBottomOf="@id/iv_avatar" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_logout"
+                style="@style/Widget.DiTalent.Button.Filled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/root_padding"
+                android:layout_marginBottom="@dimen/root_padding"
+                android:text="Logout"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

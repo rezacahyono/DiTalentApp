@@ -1,84 +1,142 @@
 package com.capstone.ditalent.data.repository.auth
 
-import android.util.Log
-import com.capstone.ditalent.data.clearUser
-import com.capstone.ditalent.data.local.preferences.UserPreferences
-import com.capstone.ditalent.data.remote.data_source.UserRemoteDataSource
-import com.capstone.ditalent.data.remote.dto.auth.RequestUser
-import com.capstone.ditalent.data.toUser
+
+import com.capstone.ditalent.R
+import com.capstone.ditalent.model.Role
+import com.capstone.ditalent.model.Talent
+import com.capstone.ditalent.model.Umkm
 import com.capstone.ditalent.model.User
-import com.capstone.ditalent.utils.ApiResult
-import com.capstone.ditalent.utils.Constant.TOKEN
-import com.capstone.ditalent.utils.Result
+import com.capstone.ditalent.utils.Constant.USERS_COLLECTION
 import com.capstone.ditalent.utils.UiText
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.snapshots
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
-    private val userRemoteDataSource: UserRemoteDataSource,
-    private val userPreferences: UserPreferences,
+    private val auth: FirebaseAuth,
+    private val db: FirebaseFirestore,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : UserRepository {
 
-    override val userPref: Flow<User>
-        get() = userPreferences.userPref.flowOn(ioDispatcher)
-
-    override suspend fun setUserpref(user: User) {
-        withContext(ioDispatcher) {
-            userPreferences.setUserPref(user)
+    override val firebaseUser: Flow<FirebaseUser> = callbackFlow {
+        val authStateListener = FirebaseAuth.AuthStateListener {
+            it.currentUser?.let { user ->
+                trySend(user)
+            }
         }
-    }
-
-    override fun login(email: String, password: String): Flow<Map<Boolean, UiText>> = flow {
-        when (val source = userRemoteDataSource.login(email, password)) {
-            is ApiResult.ApiSuccess -> {
-                val message = source.data.message
-                val result = mapOf(true to UiText.DynamicString(message))
-                emit(result)
-                Log.d("TAG", "login: ${source.data.toUser().copy(isLogin = true)}")
-                userPreferences.setUserPref(source.data.toUser().copy(isLogin = true))
-            }
-            is ApiResult.ApiError -> {
-                val result = mapOf(false to source.uiText)
-                emit(result)
-            }
+        auth.addAuthStateListener(authStateListener)
+        awaitClose {
+            auth.removeAuthStateListener(authStateListener)
         }
     }.flowOn(ioDispatcher)
 
-    override fun register(requestUser: RequestUser): Flow<Map<Boolean, UiText>> = flow {
-        when (val source = userRemoteDataSource.register(requestUser)) {
-            is ApiResult.ApiSuccess -> {
-                val message = source.data.message
-                val result = mapOf(true to UiText.DynamicString(message))
-                emit(result)
+    override fun getUser(userId: String): Flow<User> =
+        db.collection(USERS_COLLECTION).document(userId).snapshots()
+            .mapNotNull {
+                it.toObject(User::class.java)
             }
-            is ApiResult.ApiError -> {
-                Log.d("TAG", "register: ${source.uiText}")
-                val result = mapOf(false to source.uiText)
-                emit(result)
-            }
-        }
+
+
+    override fun loginWithEmailPassword(
+        email: String,
+        password: String
+    ): Flow<Map<Boolean, UiText>> = flow {
+        val result = auth.signInWithEmailAndPassword(email, password).await()
+        result.user?.let {
+            emit(mapOf(true to UiText.StringResource(R.string.text_result_login_success)))
+        } ?: emit(mapOf(false to UiText.StringResource(R.string.text_result_login_failed)))
+    }.catch {
+        emit(mapOf(false to UiText.StringResource(R.string.text_result_login_failed)))
     }.flowOn(ioDispatcher)
 
-    override fun getMe(): Flow<Result<User>> = flow {
+    override fun loginWithGoogle(
+        credential: AuthCredential,
+        role: String
+    ): Flow<Map<Boolean, UiText>> = flow {
+        val result = auth.signInWithCredential(credential).await()
+        result.user?.let { user ->
+            val userCollectionReference = db.collection(USERS_COLLECTION)
 
-        val userPref = userPref.first()
-        val token = TOKEN.plus(userPref.token)
+            val roleData: Any = if (role == Role.TALENT.toString()) {
+                Talent()
+            } else {
+                Umkm()
+            }
 
-        when (val source = userRemoteDataSource.getMe(token)) {
-            is ApiResult.ApiSuccess -> {
-                val result = source.data.toUser()
-                emit(Result.Success(result))
+            val userData = User(
+                id = user.uid,
+                email = user.email,
+                photo = user.photoUrl.toString(),
+                name = user.displayName,
+                role = role
+            )
+            userCollectionReference
+                .document(user.uid).set(userData).await()
+
+            val roleCollectionReference = userCollectionReference.document(user.uid)
+            roleCollectionReference.collection(role).document(user.uid).set(roleData).await()
+            emit(mapOf(true to UiText.StringResource(R.string.text_result_login_success)))
+        } ?: emit(mapOf(false to UiText.StringResource(R.string.text_result_login_failed)))
+    }.catch {
+        emit(mapOf(false to UiText.StringResource(R.string.text_result_login_failed)))
+    }.flowOn(ioDispatcher)
+
+    override fun register(
+        name: String,
+        email: String,
+        role: String,
+        noPhone: String,
+        password: String
+    ): Flow<Map<Boolean, UiText>> = flow {
+        val result = auth.createUserWithEmailAndPassword(email, password).await()
+        result.user?.let { user ->
+            val userCollectionReference = db.collection(USERS_COLLECTION)
+            val profileUpdate = userProfileChangeRequest {
+                displayName = name
             }
-            is ApiResult.ApiError -> {
-                val result = source.uiText
-                emit(Result.Error(result))
+            user.updateProfile(profileUpdate)
+
+            val roleData: Any = if (role == Role.TALENT.toString()) {
+                Talent()
+            } else {
+                Umkm()
             }
-        }
-    }.onStart { emit(Result.Loading) }.flowOn(ioDispatcher)
+
+            val userData = User(
+                id = user.uid,
+                email = email,
+                photo = user.photoUrl.toString(),
+                name = name,
+                noPhone = noPhone,
+                role = role
+            )
+            userCollectionReference
+                .document(user.uid).set(userData).await()
+
+            val roleCollectionReference = userCollectionReference.document(user.uid)
+            roleCollectionReference.collection(role).document(user.uid).set(roleData).await()
+
+            emit(mapOf(true to UiText.StringResource(R.string.text_result_register_success)))
+        } ?: emit(mapOf(false to UiText.StringResource(R.string.text_result_register_failed)))
+    }.catch {
+        emit(mapOf(false to UiText.StringResource(R.string.text_result_register_failed)))
+    }.flowOn(ioDispatcher)
+
+    override fun logout(): Flow<Map<Boolean, UiText>> = flow<Map<Boolean, UiText>> {
+        auth.signOut()
+        emit(mapOf(true to UiText.StringResource(R.string.text_result_register_success)))
+    }.catch {
+        emit(mapOf(false to UiText.StringResource(R.string.text_result_register_failed)))
+    }.flowOn(ioDispatcher)
 
 
 }

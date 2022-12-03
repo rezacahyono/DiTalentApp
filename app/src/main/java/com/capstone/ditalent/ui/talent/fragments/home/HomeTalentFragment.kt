@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.capstone.ditalent.R
 import com.capstone.ditalent.databinding.FragmentHomeTalentBinding
+import com.capstone.ditalent.ui.auth.fragments.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -18,7 +19,7 @@ class HomeTalentFragment : Fragment() {
     private var _binding: FragmentHomeTalentBinding? = null
     private val binding get() = _binding as FragmentHomeTalentBinding
 
-    private val homeTalentViewModel: HomeTalentViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,8 +33,16 @@ class HomeTalentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homeTalentViewModel.userPref.observe(viewLifecycleOwner) { user ->
-            binding.tvUsername.text = getString(R.string.greeting_user, user.username)
+        loginViewModel.firebaseUser.observe(viewLifecycleOwner) { state ->
+            val currentUser = state.firebaseUser
+            currentUser?.uid?.let { id ->
+                loginViewModel.getUser(id).observe(viewLifecycleOwner) { state ->
+                    state.user?.let { user ->
+                        binding.tvUsername.text = getString(R.string.greeting_user, user.name)
+                    }
+                }
+            }
+
         }
 
         binding.apply {

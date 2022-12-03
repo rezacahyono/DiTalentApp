@@ -16,7 +16,6 @@
         app:layout_constraintBottom_toTopOf="@id/tv_title_boarding"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:layout_editor_absoluteX="24dp"
         tools:src="@drawable/slide_board_1" />
 
     <com.google.android.material.textview.MaterialTextView

@@ -1,24 +1,28 @@
 package com.capstone.ditalent.di
 
-import com.capstone.ditalent.data.repository.auth.UserRepository
-import com.capstone.ditalent.data.repository.auth.UserRepositoryImpl
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+object FirebaseModule {
 
-    @Provides
     @Singleton
-    fun provideUserRepository(
-        firebaseAuth: FirebaseAuth,
-        firestore: FirebaseFirestore
-    ): UserRepository = UserRepositoryImpl(firebaseAuth, firestore)
+    @Provides
+    fun provideAuthFirebase(): FirebaseAuth =
+        Firebase.auth
 
+
+    @Singleton
+    @Provides
+    fun provideFirestore(): FirebaseFirestore = Firebase.firestore
 }

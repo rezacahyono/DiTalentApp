@@ -1,7 +1,6 @@
 package com.capstone.ditalent.ui.auth.fragments.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.capstone.ditalent.R
 import com.capstone.ditalent.component.LoadingDialog
 import com.capstone.ditalent.databinding.FragmentLoginBinding
+import com.capstone.ditalent.ui.auth.activities.AuthActivity
 import com.capstone.ditalent.utils.Utilities.hideSoftKeyboard
 import com.capstone.ditalent.utils.Utilities.isNotValidEmail
 import com.capstone.ditalent.utils.Utilities.showSnackBar
@@ -24,8 +24,14 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding as FragmentLoginBinding
 
     private lateinit var loadingDialog: LoadingDialog
+    private lateinit var authAct: AuthActivity
 
     private val loginViewModel: LoginViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        authAct = activity as AuthActivity
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +50,10 @@ class LoginFragment : Fragment() {
             tvRegister.setOnClickListener { navigateToRegister() }
             btnLogin.setOnClickListener {
                 setupToLogin()
+            }
+
+            btnLoginWithGoogle.setOnClickListener {
+                authAct.signInWithGoogle()
             }
         }
     }
@@ -74,7 +84,6 @@ class LoginFragment : Fragment() {
 
         if (loginCorrect) {
             loginViewModel.login(email, password).observe(viewLifecycleOwner) { state ->
-                Log.d("TAG", "setupToLogin: $state")
                 when {
                     state.isSuccess -> {
                         loadingDialog.hideDialog()
@@ -90,6 +99,7 @@ class LoginFragment : Fragment() {
                 }
             }
         }
+
         requireActivity().currentFocus?.let {
             hideSoftKeyboard(requireContext(), it)
         }
