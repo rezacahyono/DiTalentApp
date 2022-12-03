@@ -1,21 +1,29 @@
 package com.capstone.ditalent.data.repository.auth
 
-import com.capstone.ditalent.data.remote.dto.auth.RequestUser
 import com.capstone.ditalent.model.User
-import com.capstone.ditalent.utils.Result
 import com.capstone.ditalent.utils.UiText
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
 
-    val userPref: Flow<User>
+    val firebaseUser: Flow<FirebaseUser>
 
-    suspend fun setUserpref(user: User)
+    fun getUser(userId: String): Flow<User>
 
-    fun login(email: String, password: String): Flow<Map<Boolean, UiText>>
+    fun loginWithEmailPassword(email: String, password: String): Flow<Map<Boolean, UiText>>
 
-    fun register(requestUser: RequestUser): Flow<Map<Boolean, UiText>>
+    fun loginWithGoogle(credential: AuthCredential,role: String): Flow<Map<Boolean, UiText>>
 
-    fun getMe(): Flow<Result<User>>
+    fun register(
+        name: String,
+        email: String,
+        role: String,
+        noPhone: String,
+        password: String
+    ): Flow<Map<Boolean, UiText>>
+
+    fun logout(): Flow<Map<Boolean, UiText>>
 
 }

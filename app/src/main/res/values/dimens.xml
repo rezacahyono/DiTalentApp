@@ -3,6 +3,7 @@
 
     <dimen name="root_padding">24dp</dimen>
     <dimen name="root_medium_margin">16dp</dimen>
+    <dimen name="root_large_margin">32dp</dimen>
     <dimen name="root_small_margin">8dp</dimen>
     <dimen name="margin_vertical_button_slide">16dp</dimen>
     <dimen name="margin_vertical_text_slide">16dp</dimen>

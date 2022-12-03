@@ -7,7 +7,7 @@
     <string name="text_button_next">Slide Selanjutnya</string>
     <string name="image_boarding">Image boarding</string>
     <string name="text_button_login_now">Masuk Sekarang</string>
-    <string name="text_button_no_have_account">Belum Punya Akun?</string>
+    <string name="text_button_login_using_google">Masuk Dengan Google</string>
 
     <string name="title_slide_one"><![CDATA[<font color=#87000000>What is Lorem </font> <font color=#FF903F>Ipsum?</font>]]></string>
     <string name="title_slide_two"><![CDATA[<font color=#87000000>Where can </font> <font color=#FF903F>I get some?</font>]]></string>
@@ -33,6 +33,12 @@
     <string name="password">Password</string>
     <string name="forgot_password">Lupa Password ?</string>
     <string name="dont_have_a_account">Kamu belom punya akun?</string>
+    <string name="text_result_login_success">Berhasil login</string>
+    <string name="text_result_login_failed">Gagal login</string>
+    <string name="choose_your_role">Pilih role kamu ya</string>
+    <string name="or">OR</string>
+    <string name="cancel">Cancel</string>
+    <string name="next">Lanjutkan</string>
 
     <!--  Text register  -->
     <string name="registrasi">Registrasi</string>
@@ -48,6 +54,9 @@
     <string name="you_have_a_account">Kamu sudah punya akun?</string>
     <string name="user">Pengguna</string>
     <string name="prefix_no_phone">+62</string>
+    <string name="text_result_register_success">Berhasil register</string>
+    <string name="text_result_register_failed">Gagal register</string>
+
 
     <!--  Text error message  -->
     <string name="text_message_error_server">Maaf, ada kesalahan dari server</string>

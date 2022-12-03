@@ -10,14 +10,14 @@ buildscript {
         data_store_version = "1.0.0"
         lifecycle_version = "2.6.0-alpha03"
         nav_version = "2.5.3"
-        retrofit_version = "2.9.0"
-        okhttp3_version = "5.0.0-alpha.6"
         lottie_version = "5.2.0"
+        gms_version = "4.3.14"
     }
 
     dependencies {
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
         classpath 'org.jetbrains.kotlin:kotlin-serialization:1.7.10'
+        classpath "com.google.gms:google-services:$gms_version"
     }
 }
 plugins {

@@ -1,4 +1,4 @@
-package com.capstone.ditalent.data.local.preferences
+package com.capstone.ditalent.data.preferences
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

@@ -145,5 +145,47 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_title_register" />
 
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider_1"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/size_divider"
+        app:layout_constraintBottom_toBottomOf="@id/tv_or"
+        app:layout_constraintEnd_toStartOf="@id/tv_or"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_or" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider_2"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/size_divider"
+        app:layout_constraintBottom_toBottomOf="@id/tv_or"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_or"
+        app:layout_constraintTop_toTopOf="@id/tv_or" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/root_small_margin"
+        android:layout_marginTop="@dimen/root_large_margin"
+        android:text="@string/or"
+        android:textColor="?colorAccent"
+        android:textAppearance="@style/TextAppearance.DiTalent.Subtitle1"
+        app:layout_constraintEnd_toStartOf="@id/divider_2"
+        app:layout_constraintStart_toEndOf="@id/divider_1"
+        app:layout_constraintTop_toBottomOf="@id/btn_login" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login_with_google"
+        style="@style/Widget.DiTalent.Button.Outlined"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/root_large_margin"
+        android:layout_marginBottom="@dimen/root_padding"
+        app:icon="@drawable/ic_google"
+        android:text="@string/text_button_login_using_google"
+        app:layout_constraintTop_toBottomOf="@id/tv_or" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

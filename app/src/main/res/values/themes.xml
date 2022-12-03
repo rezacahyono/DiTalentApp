@@ -13,7 +13,8 @@
         <item name="android:textColorSecondary">@color/textColorSecondary</item>
         <item name="colorSurface">@color/white</item>
 
-        <item name="materialAlertDialogTheme">@style/ThemeOverlay.DiTalent.MaterialAlertDialog</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.DiTalent.MaterialAlertDialog
+        </item>
         <item name="alertDialogTheme">@style/ThemeOverlay.DiTalent.AlertDialog</item>
     </style>
 

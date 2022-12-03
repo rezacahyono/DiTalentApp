@@ -3,10 +3,8 @@ package com.capstone.ditalent.ui.talent.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.capstone.ditalent.R
@@ -58,13 +56,5 @@ class TalentActivity : AppCompatActivity() {
             }
         }
 
-//        bottomNav.setOnItemReselectedListener {
-//            Log.d("TAG", "item : ${it.itemId}")
-//            Log.d("TAG", "backStack: ${navController.currentDestination?.label}")
-////            if (navController.currentBackStackEntry != null &&
-////                navController.currentDestination?.id != R.id.home_talent_nav
-////            )
-////                navController.popBackStack()
-//        }
     }
 }

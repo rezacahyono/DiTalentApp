@@ -124,7 +124,6 @@
         <item name="cornerSize">50%</item>
     </style>
 
-
     <!--  Alert Dialog  -->
     <style name="ThemeOverlay.DiTalent.AlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="dialogCornerRadius">@dimen/medium_shape_rounded</item>
@@ -141,7 +140,6 @@
     <style name="MaterialAlertDialog.DiTalent" parent="MaterialAlertDialog.MaterialComponents">
         <item name="shapeAppearance">@style/ShapeAppearance.DiTalent.MediumComponent</item>
     </style>
-
 
     <!-- Card  -->
     <style name="Widget.DiTalent.Card" parent="Widget.MaterialComponents.CardView">
