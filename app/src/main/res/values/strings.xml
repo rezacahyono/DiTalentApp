@@ -16,8 +16,6 @@
     <string name="description_slide_one">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
     <string name="description_slide_two">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</string>
     <string name="description_slide_three">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Text login  -->
     <string name="login">Login</string>
@@ -115,6 +113,9 @@
     <!-- Profile Influencer  -->
     <string name="year_age">%s Tahun</string>
     <string name="about_user">%s | %s</string>
+
+    <!--  New Project UMKM  -->
+    <string name="new_project">Project Baru</string>
 
     <!--  Text Dummy  -->
     <string name="yuk_selesaikan_project_kamu">Yuk selesaikan project kamu</string>

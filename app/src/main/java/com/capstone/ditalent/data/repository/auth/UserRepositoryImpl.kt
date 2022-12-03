@@ -83,7 +83,9 @@ class UserRepositoryImpl @Inject constructor(
                 .document(user.uid).set(userData).await()
 
             val roleCollectionReference = userCollectionReference.document(user.uid)
-            roleCollectionReference.collection(role).document(user.uid).set(roleData).await()
+            if (!roleCollectionReference.get().result.exists()) {
+                roleCollectionReference.collection(role).document(user.uid).set(roleData).await()
+            }
             emit(mapOf(true to UiText.StringResource(R.string.text_result_login_success)))
         } ?: emit(mapOf(false to UiText.StringResource(R.string.text_result_login_failed)))
     }.catch {
