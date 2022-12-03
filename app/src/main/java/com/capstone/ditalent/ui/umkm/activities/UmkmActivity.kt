@@ -30,6 +30,10 @@ class UmkmActivity : AppCompatActivity() {
         setupBottomNavigation(navController)
         setupBottomNavVisible(navController)
 
+        binding.fabNewProject.setOnClickListener {
+            navigateToAddProject(navController)
+        }
+
     }
 
     private fun setupBottomNavigation(navController: NavController) {
@@ -39,6 +43,8 @@ class UmkmActivity : AppCompatActivity() {
 
     private fun setupBottomNavVisible(navController: NavController) {
         val bottomNav = binding.bottomNavUmkm
+        val fabNewProject = binding.fabNewProject
+        val bottomAppBar = binding.bottomAppBar
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.home_umkm_nav,
@@ -47,12 +53,20 @@ class UmkmActivity : AppCompatActivity() {
                 R.id.profile_umkm_nav -> {
                     binding.fragmentContainerUmkm.margin(bottom = 56f)
                     bottomNav.isVisible = true
+                    bottomAppBar.isVisible = true
+                    fabNewProject.show()
                 }
                 else -> {
                     binding.fragmentContainerUmkm.margin(bottom = 0f)
                     bottomNav.isVisible = false
+                    bottomAppBar.isVisible = false
+                    fabNewProject.hide()
                 }
             }
         }
+    }
+
+    private fun navigateToAddProject(navController: NavController) {
+        navController.navigate(R.id.add_project_umkm_nav)
     }
 }

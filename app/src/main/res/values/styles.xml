@@ -149,4 +149,29 @@
         <item name="cardElevation">0dp</item>
     </style>
 
+    <!--  Floating Actin Button  -->
+    <style name="Widget.DiTalent.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.DiTalent.FloatingActionButton</item>
+        <item name="android:hapticFeedbackEnabled">false</item>
+        <item name="tint">@color/white</item>
+        <item name="rippleColor">@color/purple_dark</item>
+    </style>
+
+    <style name="ThemeOverlay.DiTalent.FloatingActionButton" parent="">
+        <item name="colorSecondary">@color/purple</item>
+    </style>
+
+    <!--  Bottom App Bar  -->
+    <style name="Widget.DiTalent.BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar">
+        <item name="elevation">@dimen/elevation_small</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="contentInsetStart">0dp</item>
+        <item name="fabCradleMargin">@dimen/size_cradle_fab</item>
+        <item name="fabCradleRoundedCornerRadius">@dimen/size_cradle_fab</item>
+        <item name="fabCradleVerticalOffset">0dp</item>
+        <item name="fabAlignmentMode">center</item>
+        <item name="fabAnimationMode">scale</item>
+    </style>
+
+
 </resources>
