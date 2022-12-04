@@ -1,9 +1,11 @@
 package com.capstone.ditalent.ui.auth.fragments.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -83,18 +85,19 @@ class LoginFragment : Fragment() {
         val loginCorrect = !email.isNotValidEmail() && password.length >= 6
 
         if (loginCorrect) {
-            loginViewModel.login(email, password).observe(viewLifecycleOwner) { state ->
-                when {
-                    state.isSuccess -> {
-                        loadingDialog.hideDialog()
-                        showSnackBar(requireContext(), "Success", binding.root)
-                    }
-                    state.isLoading -> {
-                        loadingDialog.showDialog()
-                    }
-                    state.isError -> {
-                        loadingDialog.hideDialog()
-                        showSnackBar(requireContext(), "Error", binding.root)
+            loginViewModel.apply {
+                login(email, password)
+                loginUiState.observe(viewLifecycleOwner) { state ->
+                    when {
+                        state.isError -> {
+                            loadingDialog.hideDialog()
+                        }
+                        state.isLoading -> {
+                            loadingDialog.showDialog()
+                        }
+                        state.isSuccess -> {
+                            loadingDialog.hideDialog()
+                        }
                     }
                 }
             }

@@ -19,7 +19,6 @@ import com.capstone.ditalent.ui.auth.activities.AuthActivity
 import com.capstone.ditalent.ui.talent.activities.TalentActivity
 import com.capstone.ditalent.utils.Constant.NULL
 import com.capstone.ditalent.utils.Utilities.getInitialName
-import com.capstone.ditalent.utils.Utilities.showSnackBar
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,31 +49,10 @@ class ProfileTalentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        profileTalentViewModel.user.observe(viewLifecycleOwner) { user ->
-//            if (user != null) {
-//                setupDataProfile(user)
-//            }
-//
-////            when {
-////                state.isError -> showSnackBar(requireContext(), "error", binding.root)
-////                state.isLoading -> showSnackBar(requireContext(), "loading", binding.root)
-////                state.user != null -> setupDataProfile(state.user)
-////            }
-//        }
-        profileTalentViewModel.firebaseUser.observe(viewLifecycleOwner) { state ->
-            val currentUser = state.firebaseUser
-            currentUser?.uid?.let { id ->
-                profileTalentViewModel.getUser(id).observe(viewLifecycleOwner) { state ->
-                    when {
-                        state.isError -> showSnackBar(requireContext(), "error", binding.root)
-                        state.isLoading -> showSnackBar(
-                            requireContext(), "loading", binding.root
-                        )
-                        state.user != null -> setupDataProfile(state.user)
-                    }
-                }
+        profileTalentViewModel.user.observe(viewLifecycleOwner) { user ->
+            user?.let {
+                setupDataProfile(it)
             }
-
         }
     }
 
@@ -90,17 +68,14 @@ class ProfileTalentFragment : Fragment() {
             }
             tvFullname.text = user.name
             tvUsername.text = user.email
-//            tvAboutUser.text = getString(
-//                R.string.about_user,
-//                getString(R.string.year_age, talent.age),
-//                talent.region
-//            )
-//            generateChipInfluence(talent.influences)
 
             btnLogout.setOnClickListener {
-                profileTalentViewModel.logout.observe(viewLifecycleOwner) {
-                    if (it) {
-                        navigateToLogin()
+                profileTalentViewModel.apply {
+                    logout()
+                    profiletalentUiState.observe(viewLifecycleOwner) { state ->
+                        if (state.isSuccess) {
+                            navigateToLogin()
+                        }
                     }
                 }
             }

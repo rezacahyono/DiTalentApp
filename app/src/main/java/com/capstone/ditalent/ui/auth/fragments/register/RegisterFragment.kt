@@ -115,8 +115,9 @@ class RegisterFragment : Fragment() {
             !email.isNotValidEmail() && name.isNotBlank() && noPhone.isNotBlank() && password.length >= 6
 
         if (registerCorrect) {
-            registerViewModel.register(name, email, role.toString(),noPhone.clearNoPhone(), password)
-                .observe(viewLifecycleOwner) { state ->
+            registerViewModel.apply {
+                register(name, email, role.toString(), noPhone.clearNoPhone(), password)
+                registerUiState.observe(viewLifecycleOwner) { state ->
                     when {
                         state.isSuccess -> {
                             loadingDialog.hideDialog()
@@ -132,6 +133,7 @@ class RegisterFragment : Fragment() {
                         }
                     }
                 }
+            }
         }
         requireActivity().currentFocus?.let {
             hideSoftKeyboard(requireContext(), it)

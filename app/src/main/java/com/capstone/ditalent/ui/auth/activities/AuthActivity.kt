@@ -22,7 +22,7 @@ import com.capstone.ditalent.ui.boarding.BoardingActivity
 import com.capstone.ditalent.ui.boarding.BoardingViewModel
 import com.capstone.ditalent.ui.talent.activities.TalentActivity
 import com.capstone.ditalent.ui.umkm.activities.UmkmActivity
-import com.capstone.ditalent.utils.Utilities
+import com.capstone.ditalent.utils.Utilities.showSnackBar
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -32,10 +32,13 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AuthActivity : AppCompatActivity() {
+
     private var _binding: ActivityAuthBinding? = null
     private val binding get() = _binding as ActivityAuthBinding
+
     private var _bindingBottomSheetRole: DialogBottomChooseRoleBinding? = null
     private val bindingBottomSheetRole get() = _bindingBottomSheetRole as DialogBottomChooseRoleBinding
+
     private lateinit var navController: NavController
 
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -46,8 +49,12 @@ class AuthActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen().apply {
-            setKeepOnScreenCondition { boardingViewModel.isFirstRun.value == null }
-            setKeepOnScreenCondition { loginViewModel.firebaseUser.value != null }
+            setKeepOnScreenCondition {
+                boardingViewModel.isFirstRun.value == null
+            }
+            setKeepOnScreenCondition {
+                loginViewModel.user.value == null
+            }
         }
 
         super.onCreate(savedInstanceState)
@@ -69,16 +76,11 @@ class AuthActivity : AppCompatActivity() {
             }
         }
 
-        loginViewModel.firebaseUser.observe(this) { state ->
-            val currentUser = state.firebaseUser
-            currentUser?.uid?.let { id ->
-                loginViewModel.getUser(id).observe(this) { state ->
-                    state.user?.let { user ->
-                        when (user.role) {
-                            Role.TALENT.toString() -> navigateToTalent()
-                            Role.UMKM.toString() -> navigateToUmkm()
-                        }
-                    }
+        loginViewModel.user.observe(this) { user ->
+            user?.let {
+                when (it.role) {
+                    Role.TALENT.toString() -> navigateToTalent()
+                    Role.UMKM.toString() -> navigateToUmkm()
                 }
             }
         }
@@ -123,25 +125,39 @@ class AuthActivity : AppCompatActivity() {
         if (result.resultCode == Activity.RESULT_OK) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
             try {
+
                 val account = task.getResult(ApiException::class.java)
                 account.idToken?.let { token ->
-                    role?.let {
-                        val credential = GoogleAuthProvider.getCredential(token, null)
-                        loginViewModel.loginWithGoogle(credential, it.toString())
-                            .observe(this) { state ->
-                                when {
-                                    state.isSuccess -> {
-                                        Utilities.showSnackBar(this, "Success", binding.root)
-                                    }
-                                    state.isError -> {
-                                        Utilities.showSnackBar(this, "Error", binding.root)
-                                    }
+
+                    val credential = GoogleAuthProvider.getCredential(token, null)
+
+                    loginViewModel.apply {
+                        loginWithGoogle(credential, role!!.toString())
+
+                        loginUiState.observe(this@AuthActivity) { state ->
+                            when {
+                                state.isSuccess -> {
+                                    showSnackBar(
+                                        this@AuthActivity,
+                                        "Success",
+                                        binding.root
+                                    )
+                                }
+                                state.isError -> {
+                                    showSnackBar(
+                                        this@AuthActivity,
+                                        "Error",
+                                        binding.root
+                                    )
                                 }
                             }
+                        }
+
                     }
+
                 }
             } catch (e: ApiException) {
-                Utilities.showSnackBar(
+                showSnackBar(
                     this,
                     getString(R.string.text_result_login_failed),
                     binding.root

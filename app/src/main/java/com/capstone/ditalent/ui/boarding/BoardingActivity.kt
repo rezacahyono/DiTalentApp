@@ -61,16 +61,11 @@ class BoardingActivity : AppCompatActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        loginViewModel.firebaseUser.observe(this) { state ->
-            val currentUser = state.firebaseUser
-            currentUser?.uid?.let { id ->
-                loginViewModel.getUser(id).observe(this) { state ->
-                    state.user?.let { user ->
-                        when (user.role) {
-                            Role.TALENT.toString() -> navigateToTalent()
-                            Role.UMKM.toString() -> navigateToUmkm()
-                        }
-                    }
+        loginViewModel.user.observe(this) { user ->
+            user?.let {
+                when (it.role) {
+                    Role.TALENT.toString() -> navigateToTalent()
+                    Role.UMKM.toString() -> navigateToUmkm()
                 }
             }
         }
@@ -149,23 +144,31 @@ class BoardingActivity : AppCompatActivity() {
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
             try {
                 val account = task.getResult(ApiException::class.java)
+
                 account.idToken?.let { token ->
-                    role?.let {
-                        val credential = GoogleAuthProvider.getCredential(token, null)
-                        loginViewModel.loginWithGoogle(credential, it.toString())
-                            .observe(this) { state ->
-                                when {
-                                    state.isSuccess -> {
-                                        navigateToAuth()
-                                        showSnackBar(this, "Success", binding.root)
-                                    }
-                                    state.isError -> {
-                                        showSnackBar(this, "Error", binding.root)
-                                    }
+
+                    val credential = GoogleAuthProvider.getCredential(token, null)
+
+                    loginViewModel.apply {
+
+                        loginWithGoogle(credential, role!!.toString())
+
+                        loginUiState.observe(this@BoardingActivity) { state ->
+                            when {
+                                state.isSuccess -> {
+                                    navigateToAuth()
+                                    showSnackBar(this@BoardingActivity, "Success", binding.root)
+                                }
+                                state.isError -> {
+                                    showSnackBar(this@BoardingActivity, "Error", binding.root)
                                 }
                             }
+                        }
+
                     }
+
                 }
+
             } catch (e: ApiException) {
                 showSnackBar(this, getString(R.string.text_result_login_failed), binding.root)
             }
