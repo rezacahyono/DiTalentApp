@@ -8,25 +8,59 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.capstone.ditalent.utils.Result
+import com.google.firebase.auth.FirebaseUser
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : ViewModel() {
 
-    private val _loginUiState: MutableLiveData<LoginUiState> = MutableLiveData()
-    val loginUiState: LiveData<LoginUiState> = _loginUiState
+    private val _loginUiState: MutableLiveData<UiState> = MutableLiveData()
+    val loginUiState: LiveData<UiState> = _loginUiState
 
-    val user: LiveData<User?> by lazy { userRepository.user.asLiveData() }
+    private val _logoutUiState: MutableLiveData<UiState> = MutableLiveData()
+    val logoutUiState: LiveData<UiState> = _logoutUiState
 
-    fun loginWithGoogle(credential: AuthCredential, role: String) {
+    val currentUser: LiveData<FirebaseUser> = userRepository.currentUser.asLiveData()
+
+    val getUser: LiveData<User> = Transformations.switchMap(currentUser) {
+        userRepository.getUser(it.uid).asLiveData()
+    }
+
+    val checkUserIsExists: LiveData<Boolean> =
+        Transformations.switchMap(currentUser) {
+            liveData {
+                val result = userRepository.checkUserIsExists(it.uid)
+                emit(result)
+            }
+        }
+
+    fun loginWithGoogle(credential: AuthCredential) {
         viewModelScope.launch {
-            userRepository.loginWithGoogle(credential, role).collect { result ->
+            userRepository.loginWithGoogle(credential).collect { result ->
                 when (result) {
-                    is Result.Success -> _loginUiState.value = LoginUiState(isSuccess = true)
-                    is Result.Loading -> _loginUiState.value = LoginUiState(isLoading = true)
+                    is Result.Success -> _loginUiState.value =
+                        UiState(isSuccess = true, message = result.data)
+                    is Result.Loading -> _loginUiState.value = UiState(isLoading = true)
                     is Result.Error -> _loginUiState.value =
-                        LoginUiState(isError = true, errorMessage = result.uiText)
+                        UiState(isError = true, message = result.uiText)
+                }
+            }
+        }
+    }
+
+    fun addUser(role: String): LiveData<UiState> = Transformations.switchMap(currentUser) {
+        liveData {
+            userRepository.addUser(it, role).collect { result ->
+                when (result) {
+                    is Result.Success ->
+                        emit(UiState(isSuccess = true, message = result.data))
+                    is Result.Loading -> emit(UiState(isLoading = true))
+                    is Result.Error ->
+                        emit(UiState(isError = true, message = result.uiText))
                 }
             }
         }
@@ -36,10 +70,25 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             userRepository.loginWithEmailPassword(email, password).collect { result ->
                 when (result) {
-                    is Result.Success -> _loginUiState.value = LoginUiState(isSuccess = true)
-                    is Result.Loading -> _loginUiState.value = LoginUiState(isLoading = true)
+                    is Result.Success -> _loginUiState.value =
+                        UiState(isSuccess = true, message = result.data)
+                    is Result.Loading -> _loginUiState.value = UiState(isLoading = true)
                     is Result.Error -> _loginUiState.value =
-                        LoginUiState(isError = true, errorMessage = result.uiText)
+                        UiState(isError = true, message = result.uiText)
+                }
+            }
+        }
+    }
+
+    fun logout() {
+        viewModelScope.launch {
+            userRepository.logout().collect { result ->
+                when (result) {
+                    is Result.Success -> _logoutUiState.value =
+                        UiState(isSuccess = true, message = result.data)
+                    is Result.Loading -> _logoutUiState.value = UiState(isLoading = true)
+                    is Result.Error -> _logoutUiState.value =
+                        UiState(isError = true, message = result.uiText)
                 }
             }
         }

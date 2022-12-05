@@ -9,6 +9,7 @@ import com.capstone.ditalent.model.User
 import com.capstone.ditalent.utils.Constant.USERS_COLLECTION
 import com.capstone.ditalent.utils.Result
 import com.capstone.ditalent.utils.UiText
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -25,6 +26,7 @@ import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
     private val auth: FirebaseAuth,
+    private val googleSignInClient: GoogleSignInClient,
     private val db: FirebaseFirestore,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : UserRepository {
@@ -41,21 +43,46 @@ class UserRepositoryImpl @Inject constructor(
         }
     }.flowOn(ioDispatcher)
 
-    override val user: Flow<User?>
-        get() = flow {
-            try {
-                val userId = currentUser.first().uid
-                val result =
-                    db.collection(USERS_COLLECTION).document(userId).get().await().toObject<User>()
-                emit(result)
-            } catch (e: Exception) {
-                emit(null)
-            }
-        }.flowOn(ioDispatcher)
 
-    /**
-     * Clear
-     */
+    override suspend fun checkUserIsExists(userId: String): Boolean {
+        return db.collection(USERS_COLLECTION).document(userId).get().await().exists()
+    }
+
+
+    override fun getUser(userId: String): Flow<User> =
+        db.collection(USERS_COLLECTION).document(userId).snapshots()
+            .mapNotNull { it.toObject<User>() }.flowOn(ioDispatcher)
+
+
+    override fun addUser(firebaseUser: FirebaseUser, role: String): Flow<Result<UiText>> =
+        flow<Result<UiText>> {
+            val userCollection = db.collection(USERS_COLLECTION)
+
+            val roleData: Any = if (role == Role.TALENT.toString()) {
+                Talent()
+            } else {
+                Umkm()
+            }
+
+            val userData = User(
+                id = firebaseUser.uid,
+                email = firebaseUser.email,
+                photo = firebaseUser.photoUrl.toString(),
+                name = firebaseUser.displayName,
+                role = role
+            )
+
+            userCollection.document(firebaseUser.uid).set(userData).await()
+
+            userCollection.document(firebaseUser.uid).collection(role).document(firebaseUser.uid)
+                .set(roleData).await()
+
+            emit(Result.Success(UiText.StringResource(R.string.text_result_register_success)))
+        }.onStart { emit(Result.Loading) }
+            .catch { emit(Result.Error(UiText.StringResource(R.string.text_result_register_failed))) }
+            .flowOn(ioDispatcher)
+
+
     override fun loginWithEmailPassword(
         email: String, password: String
     ): Flow<Result<UiText>> = flow {
@@ -73,55 +100,24 @@ class UserRepositoryImpl @Inject constructor(
         .flowOn(ioDispatcher)
 
 
-    /**
-     * Clear
-     */
-    override fun loginWithGoogle(credential: AuthCredential, role: String): Flow<Result<UiText>> =
+    override fun loginWithGoogle(credential: AuthCredential): Flow<Result<UiText>> =
         flow {
 
             val result = auth.signInWithCredential(credential).await()
 
             result.user?.let {
-                val userCollection = db.collection(USERS_COLLECTION)
-
-                val roleData: Any = if (role == Role.TALENT.toString()) {
-                    Talent()
-                } else {
-                    Umkm()
-                }
-
-                val userData = User(
-                    id = it.uid,
-                    email = it.email,
-                    photo = it.photoUrl.toString(),
-                    name = it.displayName,
-                    role = role
-                )
-
-                val userDataExist = userCollection.document(it.uid).get().result.exists()
-                if (!userDataExist) {
-                    userCollection.document(it.uid).set(userData).await()
-
-                    val roleCollection = userCollection.document(it.uid).collection(role)
-                    roleCollection.document(it.uid).set(roleData).await()
-                }
 
                 emit(Result.Success(UiText.StringResource(R.string.text_result_register_success)))
-            } ?: emit(Result.Error(UiText.StringResource(R.string.text_result_register_failed)))
+            }
+                ?: emit(Result.Error(UiText.StringResource(R.string.text_result_register_failed)))
 
         }.onStart { emit(Result.Loading) }
             .catch { emit(Result.Error(UiText.StringResource(R.string.text_result_register_failed))) }
             .flowOn(ioDispatcher)
 
-    /**
-     * Clear
-     */
+
     override fun register(
-        name: String,
-        email: String,
-        role: String,
-        noPhone: String,
-        password: String
+        name: String, email: String, role: String, noPhone: String, password: String
     ): Flow<Result<UiText>> = flow {
         val result = auth.createUserWithEmailAndPassword(email, password).await()
         result.user?.let { user ->
@@ -131,7 +127,7 @@ class UserRepositoryImpl @Inject constructor(
                 displayName = name
             }
 
-            user.updateProfile(profileUpdate)
+            user.updateProfile(profileUpdate).await()
 
             val roleData: Any = if (role == Role.TALENT.toString()) {
                 Talent()
@@ -149,25 +145,26 @@ class UserRepositoryImpl @Inject constructor(
             )
 
             userCollectionReference.document(user.uid).set(userData).await()
-
-            val roleCollectionReference = userCollectionReference.document(user.uid)
-            roleCollectionReference.collection(role).document(user.uid).set(roleData)
-                .await()
+            userCollectionReference.document(user.uid).collection(role).document(user.uid)
+                .set(roleData).await()
 
             emit(Result.Success(UiText.StringResource(R.string.text_result_register_success)))
         } ?: emit(Result.Error(UiText.StringResource(R.string.text_result_register_failed)))
+
     }.onStart { emit(Result.Loading) }
         .catch { emit(Result.Error(UiText.StringResource(R.string.text_result_register_failed))) }
         .flowOn(ioDispatcher)
 
 
-    /**
-     * Clear
-     */
     override fun logout(): Flow<Result<UiText>> = flow<Result<UiText>> {
+
         auth.signOut()
-        emit(Result.Success(UiText.StringResource(R.string.text_result_register_success)))
-    }.catch { Result.Error(UiText.StringResource(R.string.text_result_register_failed)) }
+        googleSignInClient.signOut().await()
+        emit(Result.Success(UiText.StringResource(R.string.text_result_logout_success)))
+
+    }.onStart { emit(Result.Loading) }
+        .catch { emit(Result.Error(UiText.StringResource(R.string.text_result_logout_failed))) }
+        .flowOn(ioDispatcher)
 
 
 }

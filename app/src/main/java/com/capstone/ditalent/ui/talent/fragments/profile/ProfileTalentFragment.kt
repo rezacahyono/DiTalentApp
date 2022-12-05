@@ -3,11 +3,11 @@ package com.capstone.ditalent.ui.talent.fragments.profile
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.load
 import coil.transform.CircleCropTransformation
@@ -20,6 +20,7 @@ import com.capstone.ditalent.ui.talent.activities.TalentActivity
 import com.capstone.ditalent.utils.Constant.NULL
 import com.capstone.ditalent.utils.Utilities.getInitialName
 import com.google.android.material.chip.Chip
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -49,11 +50,10 @@ class ProfileTalentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        profileTalentViewModel.user.observe(viewLifecycleOwner) { user ->
-            user?.let {
-                setupDataProfile(it)
-            }
+        profileTalentViewModel.getUser.observe(viewLifecycleOwner) { user ->
+            setupDataProfile(user)
         }
+
     }
 
     private fun setupDataProfile(user: User) {
@@ -70,12 +70,10 @@ class ProfileTalentFragment : Fragment() {
             tvUsername.text = user.email
 
             btnLogout.setOnClickListener {
-                profileTalentViewModel.apply {
-                    logout()
-                    profiletalentUiState.observe(viewLifecycleOwner) { state ->
-                        if (state.isSuccess) {
-                            navigateToLogin()
-                        }
+                showDialogLogout()
+                profileTalentViewModel.profiletalentUiState.observe(viewLifecycleOwner) { state ->
+                    if (state.isSuccess) {
+                        navigateToLogin()
                     }
                 }
             }
@@ -97,6 +95,19 @@ class ProfileTalentFragment : Fragment() {
             }
             binding.cgInfluence.addView(chip)
         }
+    }
+
+    private fun showDialogLogout() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setMessage("Kamu yakin keluar ?")
+            .setNegativeButton("Batal") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setPositiveButton("Yap") { dialog, _ ->
+                profileTalentViewModel.logout()
+                dialog.dismiss()
+            }
+            .show()
     }
 
     private fun navigateToLogin() {

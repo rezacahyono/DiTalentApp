@@ -26,13 +26,14 @@ import com.capstone.ditalent.ui.auth.activities.AuthActivity
 import com.capstone.ditalent.ui.auth.fragments.login.LoginViewModel
 import com.capstone.ditalent.ui.talent.activities.TalentActivity
 import com.capstone.ditalent.ui.umkm.activities.UmkmActivity
+import com.capstone.ditalent.utils.UiText
 import com.capstone.ditalent.utils.Utilities.showSnackBar
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -43,7 +44,8 @@ class BoardingActivity : AppCompatActivity() {
     private var _bindingBottomSheetRole: DialogBottomChooseRoleBinding? = null
     private val bindingBottomSheetRole get() = _bindingBottomSheetRole as DialogBottomChooseRoleBinding
 
-    private lateinit var googleSignInClient: GoogleSignInClient
+    @Inject
+    lateinit var googleSignInClient: GoogleSignInClient
 
     private val loginViewModel: LoginViewModel by viewModels()
 
@@ -56,17 +58,10 @@ class BoardingActivity : AppCompatActivity() {
 
         hideSystemUi()
 
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
-
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
-
-        loginViewModel.user.observe(this) { user ->
-            user?.let {
-                when (it.role) {
-                    Role.TALENT.toString() -> navigateToTalent()
-                    Role.UMKM.toString() -> navigateToUmkm()
-                }
+        loginViewModel.getUser.observe(this) { user ->
+            when (user.role) {
+                Role.TALENT.toString() -> navigateToTalent()
+                Role.UMKM.toString() -> navigateToUmkm()
             }
         }
 
@@ -114,6 +109,47 @@ class BoardingActivity : AppCompatActivity() {
     }
 
     private fun signInWithGoogle() {
+        val signInIntent = googleSignInClient.signInIntent
+        resultLauncher.launch(signInIntent)
+    }
+
+
+    private var resultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                account.idToken?.let { token ->
+                    val credential = GoogleAuthProvider.getCredential(token, null)
+                    loginViewModel.loginWithGoogle(credential)
+                    loginViewModel.loginUiState.observe(this) { state ->
+                        if (state.isError) {
+                            showSnackBar(
+                                this,
+                                getString((state.message as UiText.StringResource).id),
+                                binding.root
+                            )
+                        }
+                    }
+                    loginViewModel.checkUserIsExists.observe(this) { exists ->
+                        if (!exists){
+                            showDialogChooseRole()
+                        }
+                    }
+                }
+            } catch (e: ApiException) {
+                showSnackBar(
+                    this,
+                    getString(R.string.text_result_login_failed),
+                    binding.root
+                )
+            }
+        }
+    }
+
+    private fun showDialogChooseRole() {
         _bindingBottomSheetRole = DialogBottomChooseRoleBinding.inflate(layoutInflater)
         MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             cornerRadius(res = R.dimen.large_shape_rounded)
@@ -125,52 +161,14 @@ class BoardingActivity : AppCompatActivity() {
                     } else {
                         Role.TALENT
                     }
-                val signInIntent = googleSignInClient.signInIntent
-                resultLauncher.launch(signInIntent)
+                loginViewModel.addUser(role!!.toString())
                 _bindingBottomSheetRole = null
                 dismiss()
             }
             negativeButton(R.string.cancel) {
+                loginViewModel.logout()
                 _bindingBottomSheetRole = null
                 dismiss()
-            }
-        }
-    }
-
-    private var resultLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-            try {
-                val account = task.getResult(ApiException::class.java)
-
-                account.idToken?.let { token ->
-
-                    val credential = GoogleAuthProvider.getCredential(token, null)
-
-                    loginViewModel.apply {
-
-                        loginWithGoogle(credential, role!!.toString())
-
-                        loginUiState.observe(this@BoardingActivity) { state ->
-                            when {
-                                state.isSuccess -> {
-                                    navigateToAuth()
-                                    showSnackBar(this@BoardingActivity, "Success", binding.root)
-                                }
-                                state.isError -> {
-                                    showSnackBar(this@BoardingActivity, "Error", binding.root)
-                                }
-                            }
-                        }
-
-                    }
-
-                }
-
-            } catch (e: ApiException) {
-                showSnackBar(this, getString(R.string.text_result_login_failed), binding.root)
             }
         }
     }

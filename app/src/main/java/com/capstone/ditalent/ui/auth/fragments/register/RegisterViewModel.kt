@@ -26,13 +26,13 @@ class RegisterViewModel @Inject constructor(
             userRepository.register(name, email, role, noPhone, password).collect { result ->
                 when (result) {
                     is Result.Success -> {
-                        _registerUiState.value = RegisterUiState(isSuccess = true)
+                        _registerUiState.value = RegisterUiState(isSuccess = true, message = result.data)
                     }
                     is Result.Loading -> {
                         _registerUiState.value = RegisterUiState(isLoading = true)
                     }
                     is Result.Error -> {
-                        _registerUiState.value = RegisterUiState(isError = true, messageError = result.uiText)
+                        _registerUiState.value = RegisterUiState(isError = true, message = result.uiText)
                     }
                 }
             }

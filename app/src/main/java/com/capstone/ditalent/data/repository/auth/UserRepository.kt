@@ -11,13 +11,16 @@ interface UserRepository {
 
     val currentUser: Flow<FirebaseUser>
 
-    val user: Flow<User?>
+    suspend fun checkUserIsExists(userId: String): Boolean
+
+    fun getUser(userId: String): Flow<User>
+
+    fun addUser(firebaseUser: FirebaseUser, role: String): Flow<Result<UiText>>
 
     fun loginWithEmailPassword(email: String, password: String): Flow<Result<UiText>>
 
     fun loginWithGoogle(
-        credential: AuthCredential,
-        role: String
+        credential: AuthCredential
     ): Flow<Result<UiText>>
 
     fun register(
