@@ -119,6 +119,23 @@
         <item name="cornerSize">@dimen/medium_shape_rounded</item>
     </style>
 
+    <style name="ShapeAppearance.DiTalent.RoundedTop" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSizeTopRight">@dimen/medium_shape_rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/medium_shape_rounded</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="ShapeAppearance.DiTalent.RoundedTop.BottomSheet" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSizeTopRight">@dimen/large_shape_rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/large_shape_rounded</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+
     <style name="ShapeAppearance.DiTalent.Circle" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
@@ -149,6 +166,11 @@
         <item name="cardElevation">0dp</item>
     </style>
 
+    <style name="Widget.DiTalent.Card.AboutApp" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearance">@style/ShapeAppearance.DiTalent.RoundedTop</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
     <!--  Floating Actin Button  -->
     <style name="Widget.DiTalent.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="materialThemeOverlay">@style/ThemeOverlay.DiTalent.FloatingActionButton</item>
@@ -171,6 +193,15 @@
         <item name="fabCradleVerticalOffset">0dp</item>
         <item name="fabAlignmentMode">center</item>
         <item name="fabAnimationMode">scale</item>
+    </style>
+
+    <style name="ThemeOverlay.BottomSheetDialog" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="shapeAppearance">@style/ShapeAppearance.DiTalent.RoundedTop.BottomSheet</item>
+        <item name="backgroundTint">@color/purple</item>
+    </style>
+
+    <style name="Widget.DiTalent.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/ThemeOverlay.BottomSheetDialog</item>
     </style>
 
 

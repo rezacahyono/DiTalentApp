@@ -11,6 +11,7 @@ import com.capstone.ditalent.R
 import com.capstone.ditalent.component.LoadingDialog
 import com.capstone.ditalent.databinding.FragmentRegisterBinding
 import com.capstone.ditalent.model.Role
+import com.capstone.ditalent.utils.UiText
 import com.capstone.ditalent.utils.Utilities.clearNoPhone
 import com.capstone.ditalent.utils.Utilities.hideSoftKeyboard
 import com.capstone.ditalent.utils.Utilities.isNotValidEmail
@@ -57,7 +58,6 @@ class RegisterFragment : Fragment() {
                 setupToRegister()
             }
         }
-
 
     }
 
@@ -115,23 +115,30 @@ class RegisterFragment : Fragment() {
             !email.isNotValidEmail() && name.isNotBlank() && noPhone.isNotBlank() && password.length >= 6
 
         if (registerCorrect) {
-            registerViewModel.register(name, email, role.toString(),noPhone.clearNoPhone(), password)
-                .observe(viewLifecycleOwner) { state ->
-                    when {
-                        state.isSuccess -> {
-                            loadingDialog.hideDialog()
-                            showSnackBar(requireContext(), "Success", binding.root)
-                            navigateToBack()
-                        }
-                        state.isLoading -> {
-                            loadingDialog.showDialog()
-                        }
-                        state.isError -> {
-                            loadingDialog.hideDialog()
-                            showSnackBar(requireContext(), "Error", binding.root)
-                        }
+            registerViewModel.register(
+                name,
+                email,
+                role.toString(),
+                noPhone.clearNoPhone(),
+                password
+            )
+            registerViewModel.registerUiState.observe(viewLifecycleOwner) { state ->
+                when {
+                    state.isSuccess -> {
+                        loadingDialog.hideDialog()
+                    }
+                    state.isLoading -> {
+                        loadingDialog.showDialog()
+                    }
+                    state.isError -> {
+                        loadingDialog.hideDialog()
+                        showSnackBar(
+                            requireActivity(),
+                            getString((state.message as UiText.StringResource).id), binding.root
+                        )
                     }
                 }
+            }
         }
         requireActivity().currentFocus?.let {
             hideSoftKeyboard(requireContext(), it)

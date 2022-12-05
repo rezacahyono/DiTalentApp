@@ -11,6 +11,7 @@ import com.capstone.ditalent.R
 import com.capstone.ditalent.component.LoadingDialog
 import com.capstone.ditalent.databinding.FragmentLoginBinding
 import com.capstone.ditalent.ui.auth.activities.AuthActivity
+import com.capstone.ditalent.utils.UiText
 import com.capstone.ditalent.utils.Utilities.hideSoftKeyboard
 import com.capstone.ditalent.utils.Utilities.isNotValidEmail
 import com.capstone.ditalent.utils.Utilities.showSnackBar
@@ -83,18 +84,26 @@ class LoginFragment : Fragment() {
         val loginCorrect = !email.isNotValidEmail() && password.length >= 6
 
         if (loginCorrect) {
-            loginViewModel.login(email, password).observe(viewLifecycleOwner) { state ->
-                when {
-                    state.isSuccess -> {
-                        loadingDialog.hideDialog()
-                        showSnackBar(requireContext(), "Success", binding.root)
-                    }
-                    state.isLoading -> {
-                        loadingDialog.showDialog()
-                    }
-                    state.isError -> {
-                        loadingDialog.hideDialog()
-                        showSnackBar(requireContext(), "Error", binding.root)
+            loginViewModel.apply {
+                login(email, password)
+                loginUiState.observe(viewLifecycleOwner) { state ->
+                    when {
+                        state.isSuccess -> {
+                            loginViewModel.getUser.observe(viewLifecycleOwner) {
+                                loadingDialog.hideDialog()
+                            }
+                        }
+                        state.isLoading -> {
+                            loadingDialog.showDialog()
+                        }
+                        state.isError -> {
+                            loadingDialog.hideDialog()
+                            showSnackBar(
+                                requireActivity(),
+                                getString((state.message as UiText.StringResource).id),
+                                binding.root
+                            )
+                        }
                     }
                 }
             }
