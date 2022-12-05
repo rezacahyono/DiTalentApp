@@ -29,6 +29,7 @@ class LoadingDialog(context: Context) {
 
     fun hideDialog() {
         dialog.cancel()
+        _binding = null
     }
 
 }

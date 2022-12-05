@@ -16,6 +16,7 @@
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.DiTalent.MaterialAlertDialog
         </item>
         <item name="alertDialogTheme">@style/ThemeOverlay.DiTalent.AlertDialog</item>
+        <item name="bottomSheetDialogTheme">@style/Widget.DiTalent.BottomSheetDialog</item>
     </style>
 
     <!--  Status Bar Theme  -->

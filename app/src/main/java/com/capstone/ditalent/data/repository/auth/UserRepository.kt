@@ -5,16 +5,23 @@ import com.capstone.ditalent.utils.UiText
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.Flow
+import com.capstone.ditalent.utils.Result
 
 interface UserRepository {
 
-    val firebaseUser: Flow<FirebaseUser>
+    val currentUser: Flow<FirebaseUser>
+
+    suspend fun checkUserIsExists(userId: String): Boolean
 
     fun getUser(userId: String): Flow<User>
 
-    fun loginWithEmailPassword(email: String, password: String): Flow<Map<Boolean, UiText>>
+    fun addUser(firebaseUser: FirebaseUser, role: String): Flow<Result<UiText>>
 
-    fun loginWithGoogle(credential: AuthCredential,role: String): Flow<Map<Boolean, UiText>>
+    fun loginWithEmailPassword(email: String, password: String): Flow<Result<UiText>>
+
+    fun loginWithGoogle(
+        credential: AuthCredential
+    ): Flow<Result<UiText>>
 
     fun register(
         name: String,
@@ -22,8 +29,8 @@ interface UserRepository {
         role: String,
         noPhone: String,
         password: String
-    ): Flow<Map<Boolean, UiText>>
+    ): Flow<Result<UiText>>
 
-    fun logout(): Flow<Map<Boolean, UiText>>
+    fun logout(): Flow<Result<UiText>>
 
 }

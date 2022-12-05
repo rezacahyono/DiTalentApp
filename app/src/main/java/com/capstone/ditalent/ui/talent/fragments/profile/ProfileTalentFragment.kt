@@ -3,11 +3,11 @@ package com.capstone.ditalent.ui.talent.fragments.profile
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.load
 import coil.transform.CircleCropTransformation
@@ -19,8 +19,8 @@ import com.capstone.ditalent.ui.auth.activities.AuthActivity
 import com.capstone.ditalent.ui.talent.activities.TalentActivity
 import com.capstone.ditalent.utils.Constant.NULL
 import com.capstone.ditalent.utils.Utilities.getInitialName
-import com.capstone.ditalent.utils.Utilities.showSnackBar
 import com.google.android.material.chip.Chip
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -50,32 +50,10 @@ class ProfileTalentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        profileTalentViewModel.user.observe(viewLifecycleOwner) { user ->
-//            if (user != null) {
-//                setupDataProfile(user)
-//            }
-//
-////            when {
-////                state.isError -> showSnackBar(requireContext(), "error", binding.root)
-////                state.isLoading -> showSnackBar(requireContext(), "loading", binding.root)
-////                state.user != null -> setupDataProfile(state.user)
-////            }
-//        }
-        profileTalentViewModel.firebaseUser.observe(viewLifecycleOwner) { state ->
-            val currentUser = state.firebaseUser
-            currentUser?.uid?.let { id ->
-                profileTalentViewModel.getUser(id).observe(viewLifecycleOwner) { state ->
-                    when {
-                        state.isError -> showSnackBar(requireContext(), "error", binding.root)
-                        state.isLoading -> showSnackBar(
-                            requireContext(), "loading", binding.root
-                        )
-                        state.user != null -> setupDataProfile(state.user)
-                    }
-                }
-            }
-
+        profileTalentViewModel.getUser.observe(viewLifecycleOwner) { user ->
+            setupDataProfile(user)
         }
+
     }
 
     private fun setupDataProfile(user: User) {
@@ -90,16 +68,11 @@ class ProfileTalentFragment : Fragment() {
             }
             tvFullname.text = user.name
             tvUsername.text = user.email
-//            tvAboutUser.text = getString(
-//                R.string.about_user,
-//                getString(R.string.year_age, talent.age),
-//                talent.region
-//            )
-//            generateChipInfluence(talent.influences)
 
             btnLogout.setOnClickListener {
-                profileTalentViewModel.logout.observe(viewLifecycleOwner) {
-                    if (it) {
+                showDialogLogout()
+                profileTalentViewModel.profiletalentUiState.observe(viewLifecycleOwner) { state ->
+                    if (state.isSuccess) {
                         navigateToLogin()
                     }
                 }
@@ -122,6 +95,19 @@ class ProfileTalentFragment : Fragment() {
             }
             binding.cgInfluence.addView(chip)
         }
+    }
+
+    private fun showDialogLogout() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setMessage("Kamu yakin keluar ?")
+            .setNegativeButton("Batal") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setPositiveButton("Yap") { dialog, _ ->
+                profileTalentViewModel.logout()
+                dialog.dismiss()
+            }
+            .show()
     }
 
     private fun navigateToLogin() {

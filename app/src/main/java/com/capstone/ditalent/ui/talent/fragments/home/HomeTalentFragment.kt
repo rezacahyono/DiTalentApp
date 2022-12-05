@@ -19,7 +19,7 @@ class HomeTalentFragment : Fragment() {
     private var _binding: FragmentHomeTalentBinding? = null
     private val binding get() = _binding as FragmentHomeTalentBinding
 
-    private val loginViewModel: LoginViewModel by viewModels()
+    private val homeTalentViewModel: HomeTalentViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,16 +33,10 @@ class HomeTalentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loginViewModel.firebaseUser.observe(viewLifecycleOwner) { state ->
-            val currentUser = state.firebaseUser
-            currentUser?.uid?.let { id ->
-                loginViewModel.getUser(id).observe(viewLifecycleOwner) { state ->
-                    state.user?.let { user ->
-                        binding.tvUsername.text = getString(R.string.greeting_user, user.name)
-                    }
-                }
+        homeTalentViewModel.currentUser.observe(viewLifecycleOwner) {
+            homeTalentViewModel.getUser(it.uid).observe(viewLifecycleOwner) { user ->
+                binding.tvUsername.text = getString(R.string.greeting_user, user.name)
             }
-
         }
 
         binding.apply {

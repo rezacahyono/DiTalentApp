@@ -6,6 +6,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.capstone.ditalent.data.preferences.SettingPreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
+
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -14,12 +15,11 @@ class BoardingViewModel @Inject constructor(
     private val settingPreferences: SettingPreferences,
 ) : ViewModel() {
 
-    val isFirstRun: LiveData<Boolean> by lazy { settingPreferences.isFirstRun.asLiveData() }
+    val isFirstRunBoarding: LiveData<Boolean> = settingPreferences.isFirstRunBoarding.asLiveData()
 
-
-    fun updateIsFirstRun(value: Boolean) {
+    fun updateIsFirstRunBoarding(value: Boolean) {
         viewModelScope.launch {
-            settingPreferences.updateIsFirstRun(value)
+            settingPreferences.updateIsFirstRunBoarding(value)
         }
     }
 }

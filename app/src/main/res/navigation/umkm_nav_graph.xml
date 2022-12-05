@@ -28,5 +28,10 @@
         android:name="com.capstone.ditalent.ui.umkm.fragments.profile.ProfileUmkmFragment"
         android:label="fragment_profile_umkm"
         tools:layout="@layout/fragment_profile_umkm" />
+    <fragment
+        android:id="@+id/add_project_umkm_nav"
+        android:name="com.capstone.ditalent.ui.umkm.fragments.project.AddProjectUmkmFragment"
+        android:label="fragment_add_project_umkm"
+        tools:layout="@layout/fragment_add_project_umkm" />
 
 </navigation>
