@@ -107,7 +107,7 @@
     <string name="content_desc_confirmation">ilustration for confrimation</string>
 
     <!-- Home Influencer    -->
-    <string name="greeting_user">Hai👋, %s!</string>
+    <string name="greeting_user">Hai, %s</string>
     <string name="content_desc_iv_reward">Gambar detail rewards</string>
     <string name="content_desc_iv_back">Icon untuk kembali</string>
     <string name="content_desc_iv_project">Gambar project</string>
@@ -130,6 +130,15 @@
     <string name="item_count_reward">8</string>
     <string name="item_progress">Project Terselesaikan</string>
     <string name="logout">Logout</string>
+    <string name="greeting_umkm">Selamat datang di DiTalent.</string>
+    <string name="search_talent">Cari talent…</string>
+    <string name="top_talent">Top Talent</string>
+    <string name="cta_see_all">Lihat Semua</string>
+    <string name="tets_go">Ayoo!</string>
+    <string name="desc_lets_go">Buat project kamu untuk meningkatkan penjualan kamu !</string>
+    <string name="desc_banner_umkm">Iklankan merek Anda dengan influencer yang sesuai dan lebih baik dengan citra bisnis Anda.</string>
+    <string name="banner">Banner</string>
+    <string name="avatar">Avatar</string>
 
 
 </resources>
