@@ -10,7 +10,7 @@
         android:id="@+id/page_boarding"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/btn_next"
+        app:layout_constraintBottom_toTopOf="@id/indicator_vp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.tbuonomo.viewpagerdotsindicator.DotsIndicator

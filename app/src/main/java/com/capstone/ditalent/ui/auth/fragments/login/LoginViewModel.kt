@@ -9,9 +9,6 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.capstone.ditalent.utils.Result
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
