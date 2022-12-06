@@ -1,6 +1,7 @@
 package com.capstone.ditalent.ui.talent.fragments.home
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -21,9 +22,11 @@ class HomeTalentViewModel @Inject constructor(
 
     val isFirstRunHome: LiveData<Boolean> = settingPreferences.isFirstRunHome.asLiveData()
 
-    val currentUser: LiveData<FirebaseUser> = userRepository.currentUser.asLiveData()
+    private val currentUser: LiveData<FirebaseUser> = userRepository.currentUser.asLiveData()
 
-    fun getUser(userId: String): LiveData<User> = userRepository.getUser(userId).asLiveData()
+    fun getUser(): LiveData<User> = Transformations.switchMap(currentUser){
+        userRepository.getUser(it.uid).asLiveData()
+    }
 
     fun updateIsFirstRunHome(value: Boolean) {
         viewModelScope.launch {

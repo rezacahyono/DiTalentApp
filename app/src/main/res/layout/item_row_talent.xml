@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.DiTalent.Card.Outlined"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/root_small_margin">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <io.getstream.avatarview.AvatarView
+            android:id="@+id/iv_avatar"
+            android:layout_width="164dp"
+            android:layout_height="144dp"
+            android:contentDescription="@string/avatar"
+            android:scaleType="centerCrop"
+            app:avatarViewBorderColor="@android:color/transparent"
+            app:avatarViewInitialsBackgroundColor="@color/orange_light"
+            app:avatarViewInitialsTextColor="@color/white"
+            app:avatarViewInitialsTextSize="80sp"
+            app:avatarViewInitialsTextSizeRatio="0.33"
+            app:avatarViewShape="rounded_rect"
+            app:layout_constraintBottom_toTopOf="@id/tv_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/root_small_margin"
+            android:layout_marginTop="@dimen/root_small_margin"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:minLines="2"
+            android:textAppearance="@style/TextAppearance.DiTalent.Body2"
+            app:layout_constraintBottom_toTopOf="@id/rating_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_avatar"
+            tools:text="Anissa Putri Andini Ria" />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/rating_bar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/root_small_margin"
+            android:layout_marginTop="4dp"
+            android:numStars="5"
+            app:layout_constraintBottom_toTopOf="@id/tv_cat_influences"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_cat_influences"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/root_small_margin"
+            android:layout_marginTop="4dp"
+            android:text="Fashion | Food"
+            android:textAppearance="@style/TextAppearance.DiTalent.Caption"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_rate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rating_bar" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_rate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/root_small_margin"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="@dimen/root_small_margin"
+            android:maxLines="1"
+            android:text="Rate Rp.100,000+"
+            android:textAppearance="@style/TextAppearance.DiTalent.Body2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_cat_influences" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
