@@ -23,11 +23,11 @@ class TalentRepositoryImpl @Inject constructor(
 ) : TalentRepository {
 
     override fun getUsersRoleTalent(): Flow<Result<List<Pair<User, Talent>>>> =
-        db.collection(USERS_COLLECTION).whereEqualTo(ROLE, Role.TALENT.toString()).snapshots()
+        db.collection(USERS_COLLECTION).whereEqualTo(ROLE, Role.TALENT.toString()).limit(5).snapshots()
             .mapNotNull<QuerySnapshot, List<User>> { snapshot ->
                 snapshot.toObjects()
             }.zip(
-                db.collectionGroup(Role.TALENT.toString()).snapshots()
+                db.collectionGroup(Role.TALENT.toString()).limit(5).snapshots()
                     .mapNotNull<QuerySnapshot, List<Talent>> { it.toObjects() }.flowOn(ioDispatcher)
             ) { users, talents ->
                 users.zip(talents)

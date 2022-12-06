@@ -6,29 +6,27 @@ import androidx.appcompat.app.AlertDialog
 import com.capstone.ditalent.databinding.DialogLoadingBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class LoadingDialog(context: Context) {
+class LoadingDialog(private val context: Context) {
 
     private var _binding: DialogLoadingBinding? = null
     private val binding get() = _binding as DialogLoadingBinding
 
-    private val dialog: AlertDialog
+    private var dialog: AlertDialog? = null
 
-    init {
+
+    fun showDialog() {
         _binding = DialogLoadingBinding.inflate(LayoutInflater.from(context))
         val builder = MaterialAlertDialogBuilder(context)
             .setView(binding.root)
             .setCancelable(false)
 
         dialog = builder.create()
-    }
-
-    fun showDialog() {
-        dialog.show()
+        dialog?.show()
     }
 
 
     fun hideDialog() {
-        dialog.cancel()
+        dialog?.cancel()
         _binding = null
     }
 
