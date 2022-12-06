@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import com.capstone.ditalent.databinding.FragmentProfileUmkmBinding
 import com.capstone.ditalent.ui.auth.activities.AuthActivity
 import com.capstone.ditalent.ui.umkm.activities.UmkmActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -40,15 +41,26 @@ class ProfileUmkmFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnLogout.setOnClickListener {
-            profileUmkmViewModel.apply {
-                logout()
-                profileUmkmState.observe(viewLifecycleOwner) { state ->
-                    if (state.isSuccess) {
-                        navigateToLogin()
-                    }
+            showDialogLogout()
+            profileUmkmViewModel.profileUmkmState.observe(viewLifecycleOwner) { state ->
+                if (state.isSuccess) {
+                    navigateToLogin()
                 }
             }
         }
+    }
+
+    private fun showDialogLogout() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setMessage("Kamu yakin keluar ?")
+            .setNegativeButton("Batal") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setPositiveButton("Yap") { dialog, _ ->
+                profileUmkmViewModel.logout()
+                dialog.dismiss()
+            }
+            .show()
     }
 
     private fun navigateToLogin() {
