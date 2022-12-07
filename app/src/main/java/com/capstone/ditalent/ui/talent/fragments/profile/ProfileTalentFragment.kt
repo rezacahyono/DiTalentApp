@@ -10,7 +10,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.load
-import coil.transform.CircleCropTransformation
 import com.capstone.ditalent.R
 import com.capstone.ditalent.databinding.FragmentProfileTalentBinding
 import com.capstone.ditalent.model.Influence
@@ -18,6 +17,8 @@ import com.capstone.ditalent.model.User
 import com.capstone.ditalent.ui.auth.activities.AuthActivity
 import com.capstone.ditalent.ui.talent.activities.TalentActivity
 import com.capstone.ditalent.utils.Constant.NULL
+import com.capstone.ditalent.utils.Utilities
+import com.capstone.ditalent.utils.Utilities.dpToPx
 import com.capstone.ditalent.utils.Utilities.getInitialName
 import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -60,11 +61,14 @@ class ProfileTalentFragment : Fragment() {
         binding.apply {
             val photo = user.photo
             if (photo.isNullOrBlank() || photo == NULL) {
-                ivAvatar.avatarInitials = user.name?.getInitialName()
-            } else {
-                ivAvatar.load(photo) {
-                    transformations(CircleCropTransformation())
+                ivAvatar.apply {
+                    avatarInitials = user.name?.getInitialName()
+                    avatarCircle = true
+                    avatarInitialsBackgroundColor = Utilities.randomColor(requireContext())
+                    avatarInitialsTextSize = requireContext().dpToPx(36F)
                 }
+            } else {
+                ivAvatar.load(photo)
             }
             tvFullname.text = user.name
             tvUsername.text = user.email
@@ -99,11 +103,11 @@ class ProfileTalentFragment : Fragment() {
 
     private fun showDialogLogout() {
         MaterialAlertDialogBuilder(requireContext())
-            .setMessage("Kamu yakin keluar ?")
-            .setNegativeButton("Batal") { dialog, _ ->
+            .setMessage(getString(R.string.message_logout))
+            .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
                 dialog.dismiss()
             }
-            .setPositiveButton("Yap") { dialog, _ ->
+            .setPositiveButton(getString(R.string.yap)) { dialog, _ ->
                 profileTalentViewModel.logout()
                 dialog.dismiss()
             }

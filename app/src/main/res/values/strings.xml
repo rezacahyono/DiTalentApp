@@ -35,7 +35,7 @@
     <string name="dont_have_a_account">Kamu belom punya akun?</string>
     <string name="choose_your_role">Pilih role kamu ya</string>
     <string name="or">OR</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel">Batal</string>
     <string name="next">Lanjutkan</string>
 
     <!--  Text register  -->
@@ -57,11 +57,11 @@
     <!--  Text error message  -->
     <string name="text_message_error_server">Maaf, ada kesalahan dari server</string>
     <string name="text_message_error_internet_connection">Tidak dapat menjangkau server, periksa koneksi internet Anda!</string>
+    <string name="text_message_error_something">Maaf, ada keselahan tidak terduga</string>
+    <string name="text_message_error_auth_something_wrong">Hmm, email/password kamu salah.</string>
     <string name="text_message_error_field_cant_empty">%s tidak boleh kosong</string>
     <string name="text_result_login_success">Berhasil login</string>
-    <string name="text_result_login_failed">Gagal login</string>
     <string name="text_result_register_success">Berhasil register</string>
-    <string name="text_result_register_failed">Gagal register</string>
     <string name="text_result_logout_success">Berhasil logout</string>
     <string name="text_result_logout_failed">Gagal logout</string>
 
@@ -139,6 +139,11 @@
     <string name="desc_banner_umkm">Iklankan merek Anda dengan influencer yang sesuai dan lebih baik dengan citra bisnis Anda.</string>
     <string name="banner">Banner</string>
     <string name="avatar">Avatar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    
+    <string name="message_logout">Kamu yakin untuk keluar ?</string>
+    <string name="yap">Yap</string>
 
 
 </resources>

@@ -9,6 +9,7 @@ import com.capstone.ditalent.model.User
 import com.capstone.ditalent.utils.Constant.USERS_COLLECTION
 import com.capstone.ditalent.utils.Result
 import com.capstone.ditalent.utils.UiText
+import com.capstone.ditalent.utils.Utilities.handlingException
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
@@ -79,7 +80,9 @@ class UserRepositoryImpl @Inject constructor(
 
             emit(Result.Success(UiText.StringResource(R.string.text_result_register_success)))
         }.onStart { emit(Result.Loading) }
-            .catch { emit(Result.Error(UiText.StringResource(R.string.text_result_register_failed))) }
+            .catch { exception ->
+                emit(Result.Error(UiText.StringResource(handlingException(exception))))
+            }
             .flowOn(ioDispatcher)
 
 
@@ -93,10 +96,12 @@ class UserRepositoryImpl @Inject constructor(
 
             emit(Result.Success(UiText.StringResource(R.string.text_result_login_success)))
 
-        } ?: emit(Result.Error(UiText.StringResource(R.string.text_result_login_failed)))
+        } ?: emit(Result.Error(UiText.StringResource(R.string.text_message_error_something)))
 
     }.onStart { emit(Result.Loading) }
-        .catch { emit(Result.Error(UiText.StringResource(R.string.text_result_login_failed))) }
+        .catch { exception ->
+            emit(Result.Error(UiText.StringResource(handlingException(exception))))
+        }
         .flowOn(ioDispatcher)
 
 
@@ -108,11 +113,12 @@ class UserRepositoryImpl @Inject constructor(
             result.user?.let {
 
                 emit(Result.Success(UiText.StringResource(R.string.text_result_register_success)))
-            }
-                ?: emit(Result.Error(UiText.StringResource(R.string.text_result_register_failed)))
+            } ?: emit(Result.Error(UiText.StringResource(R.string.text_message_error_something)))
 
         }.onStart { emit(Result.Loading) }
-            .catch { emit(Result.Error(UiText.StringResource(R.string.text_result_register_failed))) }
+            .catch { exception ->
+                emit(Result.Error(UiText.StringResource(handlingException(exception))))
+            }
             .flowOn(ioDispatcher)
 
 
@@ -149,10 +155,12 @@ class UserRepositoryImpl @Inject constructor(
                 .set(roleData).await()
 
             emit(Result.Success(UiText.StringResource(R.string.text_result_register_success)))
-        } ?: emit(Result.Error(UiText.StringResource(R.string.text_result_register_failed)))
+        } ?: emit(Result.Error(UiText.StringResource(R.string.text_message_error_something)))
 
     }.onStart { emit(Result.Loading) }
-        .catch { emit(Result.Error(UiText.StringResource(R.string.text_result_register_failed))) }
+        .catch { exception ->
+            emit(Result.Error(UiText.StringResource(handlingException(exception))))
+        }
         .flowOn(ioDispatcher)
 
 
@@ -163,7 +171,9 @@ class UserRepositoryImpl @Inject constructor(
         emit(Result.Success(UiText.StringResource(R.string.text_result_logout_success)))
 
     }.onStart { emit(Result.Loading) }
-        .catch { emit(Result.Error(UiText.StringResource(R.string.text_result_logout_failed))) }
+        .catch { exception ->
+            emit(Result.Error(UiText.StringResource(handlingException(exception))))
+        }
         .flowOn(ioDispatcher)
 
 

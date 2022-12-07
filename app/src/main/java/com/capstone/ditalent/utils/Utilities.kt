@@ -15,7 +15,14 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import com.capstone.ditalent.R
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.FirebaseNetworkException
+import com.google.firebase.auth.FirebaseAuthEmailException
+import com.google.firebase.auth.FirebaseAuthException
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.firestore.auth.FirebaseAuthCredentialsProvider
 
 object Utilities {
 
@@ -131,28 +138,6 @@ object Utilities {
         return stringBuilder.toString()
     }
 
-    fun View.margin(
-        left: Float? = null,
-        top: Float? = null,
-        right: Float? = null,
-        bottom: Float? = null
-    ) {
-        layoutParams<ViewGroup.MarginLayoutParams> {
-            left?.run { leftMargin = dpToPx(this) }
-            top?.run { topMargin = dpToPx(this) }
-            right?.run { rightMargin = dpToPx(this) }
-            bottom?.run { bottomMargin = dpToPx(this) }
-        }
-    }
-
-    private inline fun <reified T : ViewGroup.LayoutParams> View.layoutParams(block: T.() -> Unit) {
-        if (layoutParams is T) block(layoutParams as T)
-    }
-
-    private fun View.dpToPx(dp: Float): Int = context.dpToPx(dp)
-    private fun Context.dpToPx(dp: Float): Int =
-        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics).toInt()
-
     fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
         observe(lifecycleOwner, object : Observer<T> {
             override fun onChanged(t: T?) {
@@ -160,5 +145,28 @@ object Utilities {
                 removeObserver(this)
             }
         })
+    }
+
+    fun Context.dpToPx(dp: Float): Int =
+        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics).toInt()
+
+    fun randomColor(context: Context): Int {
+        val color = when ((1..5).random()) {
+            1 -> R.color.orange_light
+            2 -> R.color.blue
+            3 -> R.color.mint_green
+            4 -> R.color.red
+            else -> R.color.dark_green
+        }
+        return ContextCompat.getColor(context, color)
+    }
+
+    fun handlingException(exception: Throwable): Int {
+        return when (exception) {
+            is FirebaseAuthInvalidUserException -> R.string.text_message_error_auth_something_wrong
+            is FirebaseAuthInvalidCredentialsException -> R.string.text_message_error_auth_something_wrong
+            is FirebaseNetworkException -> R.string.text_message_error_internet_connection
+            else -> R.string.text_message_error_something
+        }
     }
 }

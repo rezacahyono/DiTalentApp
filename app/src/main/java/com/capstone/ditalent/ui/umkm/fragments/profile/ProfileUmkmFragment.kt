@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.capstone.ditalent.R
 import com.capstone.ditalent.databinding.FragmentProfileUmkmBinding
 import com.capstone.ditalent.ui.auth.activities.AuthActivity
 import com.capstone.ditalent.ui.umkm.activities.UmkmActivity
@@ -52,11 +53,11 @@ class ProfileUmkmFragment : Fragment() {
 
     private fun showDialogLogout() {
         MaterialAlertDialogBuilder(requireContext())
-            .setMessage("Kamu yakin keluar ?")
-            .setNegativeButton("Batal") { dialog, _ ->
+            .setMessage(getString(R.string.message_logout))
+            .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
                 dialog.dismiss()
             }
-            .setPositiveButton("Yap") { dialog, _ ->
+            .setPositiveButton(getString(R.string.yap)) { dialog, _ ->
                 profileUmkmViewModel.logout()
                 dialog.dismiss()
             }

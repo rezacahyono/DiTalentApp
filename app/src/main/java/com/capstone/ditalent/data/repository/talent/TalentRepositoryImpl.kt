@@ -34,7 +34,7 @@ class TalentRepositoryImpl @Inject constructor(
             }.mapNotNull {
                 Result.Success(it) as Result<List<Pair<User, Talent>>>
             }
-            .catch { emit(Result.Error(UiText.StringResource(R.string.text_result_register_failed))) }
+            .catch { emit(Result.Error(UiText.StringResource(R.string.text_message_error_something))) }
             .onStart { emit(Result.Loading) }
             .flowOn(ioDispatcher)
 }

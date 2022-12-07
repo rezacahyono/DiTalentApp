@@ -1,21 +1,26 @@
 package com.capstone.ditalent.adapter
 
-import android.util.Log
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.capstone.ditalent.R
 import com.capstone.ditalent.databinding.ItemRowTalentBinding
 import com.capstone.ditalent.model.Talent
 import com.capstone.ditalent.model.User
 import com.capstone.ditalent.utils.Constant
+import com.capstone.ditalent.utils.Utilities.dpToPx
 import com.capstone.ditalent.utils.Utilities.getInitialName
+import com.capstone.ditalent.utils.Utilities.randomColor
 
 class ListTalentAdapter(
     private val onClickItem: (String) -> Unit
 ) : ListAdapter<Pair<User, Talent>, ListTalentAdapter.ListTalentViewHolder>(DiffCallback) {
+    private lateinit var ctx: Context
 
     inner class ListTalentViewHolder(
         private val binding: ItemRowTalentBinding
@@ -26,7 +31,11 @@ class ListTalentAdapter(
 
                 val photo = talent.first.photo
                 if (photo.isNullOrBlank() || photo == Constant.NULL) {
-                    ivAvatar.avatarInitials = talent.first.name?.getInitialName()
+                    ivAvatar.apply {
+                        avatarInitials = talent.first.name?.getInitialName()
+                        avatarInitialsBackgroundColor = randomColor(ctx)
+                        avatarInitialsTextSize = ctx.dpToPx(80F)
+                    }
                 } else {
                     ivAvatar.load(photo)
                 }
@@ -46,8 +55,9 @@ class ListTalentAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListTalentViewHolder {
+        ctx = parent.context
         val binding =
-            ItemRowTalentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemRowTalentBinding.inflate(LayoutInflater.from(ctx), parent, false)
         return ListTalentViewHolder(binding)
     }
 

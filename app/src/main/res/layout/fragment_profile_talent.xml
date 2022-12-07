@@ -19,22 +19,35 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/frame_margin_bottom">
 
-            <io.getstream.avatarview.AvatarView
+            <com.capstone.ditalent.component.AvatarView
                 android:id="@+id/iv_avatar"
                 android:layout_width="@dimen/size_image_circle"
                 android:layout_height="@dimen/size_image_circle"
                 android:layout_marginStart="@dimen/root_padding"
                 android:layout_marginTop="@dimen/root_padding"
-                app:avatarViewInitialsBackgroundColor="@color/orange_light"
-                app:avatarViewInitialsTextColor="@color/white"
-                app:avatarViewInitialsTextSize="36sp"
-                app:avatarViewInitialsTextSizeRatio="0.33"
-                app:avatarViewInitialsTextStyle="bold"
-                app:avatarViewShape="circle"
+                android:contentDescription="@string/avatar"
+                android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/ShapeAppearance.DiTalent.Circle"
+                tools:src="@tools:sample/avatars" />
+            <!--            <image-->
+            <!--                android:id="@+id/iv_avatar"-->
+            <!--                android:layout_width="@dimen/size_image_circle"-->
+            <!--                android:layout_height="@dimen/size_image_circle"-->
+            <!--                android:layout_marginStart="@dimen/root_padding"-->
+            <!--                android:layout_marginTop="@dimen/root_padding"-->
+            <!--                app:avatarViewInitialsBackgroundColor="@color/orange_light"-->
+            <!--                app:avatarViewInitialsTextColor="@color/white"-->
+            <!--                app:avatarViewInitialsTextSize="36sp"-->
+            <!--                app:avatarViewInitialsTextSizeRatio="0.33"-->
+            <!--                app:avatarViewInitialsTextStyle="bold"-->
+            <!--                app:avatarViewShape="circle"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_fullname"

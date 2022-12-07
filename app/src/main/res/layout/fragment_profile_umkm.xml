@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/root_padding"
+    android:paddingHorizontal="@dimen/root_padding"
+    android:paddingTop="@dimen/root_padding"
+    android:paddingBottom="@dimen/frame_margin_bottom"
     tools:context=".ui.umkm.fragments.profile.ProfileUmkmFragment">
 
 
