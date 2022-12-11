@@ -17,7 +17,7 @@
         android:layout_marginHorizontal="26dp"
         android:layout_marginTop="70dp"
         android:contentDescription="@string/content_desc_confirmation"
-        android:src="@drawable/ic_confirmation_success"
+        android:src="@drawable/slide_board_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_toolbar" />

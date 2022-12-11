@@ -9,7 +9,11 @@
         android:id="@+id/home_umkm_nav"
         android:name="com.capstone.ditalent.ui.umkm.fragments.home.HomeUmkmFragment"
         android:label="fragment_home_umkm"
-        tools:layout="@layout/fragment_home_umkm" />
+        tools:layout="@layout/fragment_home_umkm">
+        <action
+            android:id="@+id/action_home_umkm_nav_to_search_umkm_nav"
+            app:destination="@id/search_talent_nav" />
+    </fragment>
 
     <fragment
         android:id="@+id/project_umkm_nav"
@@ -33,5 +37,23 @@
         android:name="com.capstone.ditalent.ui.umkm.fragments.project.AddProjectUmkmFragment"
         android:label="fragment_add_project_umkm"
         tools:layout="@layout/fragment_add_project_umkm" />
+    <fragment
+        android:id="@+id/search_talent_nav"
+        android:name="com.capstone.ditalent.ui.umkm.fragments.search.SearchTalentFragment"
+        android:label="fragment_search_umkm"
+        tools:layout="@layout/fragment_search_talent" >
+        <action
+            android:id="@+id/action_search_talent_nav_to_dialog_filter_umkm_nav"
+            app:destination="@id/dialog_filter_umkm_nav" />
+        <argument
+            android:name="isFocus"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/dialog_filter_umkm_nav"
+        android:name="com.capstone.ditalent.ui.umkm.fragments.search.dialog.DialogFilterUmkm"
+        android:label="DialogFilterUmkm" />
 
 </navigation>

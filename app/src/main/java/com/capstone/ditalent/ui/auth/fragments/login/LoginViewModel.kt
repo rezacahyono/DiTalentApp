@@ -1,5 +1,6 @@
 package com.capstone.ditalent.ui.auth.fragments.login
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.capstone.ditalent.data.repository.auth.UserRepository
 import com.capstone.ditalent.model.User
@@ -66,6 +67,7 @@ class LoginViewModel @Inject constructor(
     fun login(email: String, password: String) {
         viewModelScope.launch {
             userRepository.loginWithEmailPassword(email, password).collect { result ->
+                Log.d("TAG", "login: $result")
                 when (result) {
                     is Result.Success -> _loginUiState.value =
                         UiState(isSuccess = true, message = result.data)

@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.ditalent.R
+import com.capstone.ditalent.adapter.ListRewardAdapter
 import com.capstone.ditalent.databinding.FragmentHomeTalentBinding
+import com.capstone.ditalent.utils.DataDummy
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -19,6 +22,8 @@ class HomeTalentFragment : Fragment() {
     private val binding get() = _binding as FragmentHomeTalentBinding
 
     private val homeTalentViewModel: HomeTalentViewModel by viewModels()
+
+    private lateinit var listRewardAdapter: ListRewardAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +44,21 @@ class HomeTalentFragment : Fragment() {
         binding.apply {
             tvCtaRewardMore.setOnClickListener { navigateToReward() }
             tvCtaProjectMore.setOnClickListener { navigateToProject() }
+        }
+
+        setupRecyclerReward()
+    }
+
+    private fun setupRecyclerReward() {
+        listRewardAdapter = ListRewardAdapter { }
+        val listReward = DataDummy.listReward
+        listRewardAdapter.submitList(listReward)
+
+        val linearLayoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvReward.apply {
+            layoutManager = linearLayoutManager
+            adapter = listRewardAdapter
         }
     }
 

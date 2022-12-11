@@ -1,11 +1,13 @@
 package com.capstone.ditalent.ui.umkm.fragments.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.ditalent.R
 import com.capstone.ditalent.adapter.ListTalentAdapter
@@ -29,8 +31,7 @@ class HomeUmkmFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeUmkmBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -44,9 +45,26 @@ class HomeUmkmFragment : Fragment() {
         }
 
         homeUmkmViewModel.homeUmkmUiState.observe(viewLifecycleOwner) { state ->
-            if (!state.isLoading && !state.isError) {
-                listTalentAdapter.submitList(state.talents)
+            when {
+                state.isError -> {
+                    Toast.makeText(requireContext(), "Erro", Toast.LENGTH_SHORT).show()
+                }
+                state.isLoading -> {
+
+                }
+                else -> {
+                    listTalentAdapter.submitList(state.talents)
+                }
             }
+        }
+
+        setupViewHome()
+    }
+
+    private fun setupViewHome() {
+        binding.apply {
+            edtSearch.setOnClickListener { navigateToSearch(true) }
+            tvCtaTalentMore.setOnClickListener { navigateToSearch(false) }
         }
 
         setupRecyclerTopTalents()
@@ -58,6 +76,11 @@ class HomeUmkmFragment : Fragment() {
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = listTalentAdapter
         }
+    }
+
+    private fun navigateToSearch(isFocus: Boolean) {
+        val directions = HomeUmkmFragmentDirections.actionHomeUmkmNavToSearchUmkmNav(isFocus)
+        findNavController().navigate(directions)
     }
 
     override fun onDestroyView() {

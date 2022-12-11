@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/layout_toolbar"
+        layout="@layout/layout_filter_toolbar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/root_padding">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_title_sort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sort"
+                android:textAppearance="@style/TextAppearance.DiTalent.Subtitle1"
+                app:layout_constraintBottom_toTopOf="@id/cg_sort"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_sort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/root_small_margin"
+                app:checkedChip="@id/c_sort_by_high_rate"
+                app:layout_constraintBottom_toTopOf="@id/tv_title_rate"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_sort"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/c_sort_by_high_rate"
+                    style="@style/Widget.DiTalent.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/high_rate"
+                    app:chipStrokeColor="@color/selector_chip_filter" />
+
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/c_sort_by_low_rate"
+                    style="@style/Widget.DiTalent.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/low_rate" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/c_sort_by_new"
+                    style="@style/Widget.DiTalent.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/in_new" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/c_sort_by_high_followers"
+                    style="@style/Widget.DiTalent.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/high_followers"
+                    app:chipStrokeColor="@color/selector_chip_filter" />
+
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/c_sort_by_low_followers"
+                    style="@style/Widget.DiTalent.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/low_followers" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_title_rate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/root_medium_margin"
+                android:text="@string/rate"
+                android:textAppearance="@style/TextAppearance.DiTalent.Subtitle1"
+                app:layout_constraintBottom_toTopOf="@id/layout_edt_high_rate"
+                app:layout_constraintTop_toBottomOf="@id/cg_sort" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_edt_high_rate"
+                style="@style/Widget.DiTalent.LayoutInputText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_layout_text_to_title"
+                android:layout_marginEnd="@dimen/root_small_margin"
+                android:hint="@string/highest"
+                app:hintEnabled="true"
+                app:layout_constraintBottom_toTopOf="@id/tv_title_followers"
+                app:layout_constraintEnd_toStartOf="@id/layout_edt_low_rate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_rate"
+                app:startIconDrawable="@drawable/ic_rp">
+
+                <com.capstone.ditalent.component.InputText
+                    android:id="@+id/edt_high_rate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_edt_low_rate"
+                style="@style/Widget.DiTalent.LayoutInputText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/root_small_margin"
+                android:hint="@string/lowest"
+                app:hintEnabled="true"
+                app:layout_constraintBottom_toBottomOf="@id/layout_edt_high_rate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/layout_edt_high_rate"
+                app:layout_constraintTop_toTopOf="@id/layout_edt_high_rate"
+                app:startIconDrawable="@drawable/ic_rp">
+
+                <com.capstone.ditalent.component.InputText
+                    android:id="@+id/edt_low_rate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_title_followers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/root_medium_margin"
+                android:text="@string/followers"
+                android:textAppearance="@style/TextAppearance.DiTalent.Subtitle1"
+                app:layout_constraintBottom_toTopOf="@id/rs_followers"
+                app:layout_constraintTop_toBottomOf="@id/layout_edt_high_rate" />
+
+            <com.google.android.material.slider.RangeSlider
+                android:id="@+id/rs_followers"
+                style="@style/Widget.DiTalent.Slider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/root_small_margin"
+                android:stepSize="10"
+                android:valueFrom="1000"
+                android:valueTo="10000000"
+                app:labelBehavior="visible"
+                app:layout_constraintBottom_toTopOf="@id/tv_title_gender"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_followers"
+                app:values="@array/initial_slider_values" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_title_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/root_medium_margin"
+                android:text="@string/gender"
+                android:textAppearance="@style/TextAppearance.DiTalent.Subtitle1"
+                app:layout_constraintBottom_toTopOf="@id/rg_choose_gender"
+                app:layout_constraintTop_toBottomOf="@id/rs_followers" />
+
+            <RadioGroup
+                android:id="@+id/rg_choose_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/root_small_margin"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@id/tv_title_rating"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_gender">
+
+                <RadioButton
+                    android:id="@+id/rb_choose_male"
+                    style="@style/Widget.DiTalent.RadioButton.Role"
+                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="@dimen/root_small_margin"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="@string/male" />
+
+                <RadioButton
+                    android:id="@+id/rb_choose_female"
+                    style="@style/Widget.DiTalent.RadioButton.Role"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="@dimen/root_small_margin"
+                    android:layout_weight="1"
+                    android:text="@string/female" />
+
+            </RadioGroup>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_title_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/root_medium_margin"
+                android:text="@string/rating"
+                android:textAppearance="@style/TextAppearance.DiTalent.Subtitle1"
+                app:layout_constraintBottom_toTopOf="@id/cg_rating"
+                app:layout_constraintTop_toBottomOf="@id/rg_choose_gender" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/root_small_margin"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_rating">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/c_four_up_rating"
+                    style="@style/Widget.DiTalent.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/four_up_rating"
+                    app:chipIcon="@drawable/ic_star_rate"
+                    app:chipIconEnabled="true"
+                    app:chipIconVisible="true" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_apply"
+                style="@style/Widget.DiTalent.Button.Filled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/apply"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cg_rating"
+                app:layout_constraintVertical_bias="1.0"
+                tools:layout_editor_absoluteX="24dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

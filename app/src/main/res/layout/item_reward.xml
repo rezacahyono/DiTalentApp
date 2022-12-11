@@ -5,8 +5,7 @@
     style="@style/Widget.DiTalent.Card.Outlined"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/root_padding"
-    android:layout_marginVertical="@dimen/root_small_margin">
+    android:layout_margin="@dimen/root_small_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,8 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:contentDescription="@string/image_reward"
-            android:scaleType="centerCrop"
-            android:src="@drawable/cat"
+            android:scaleType="fitXY"
+            android:src="@drawable/banner_reward_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

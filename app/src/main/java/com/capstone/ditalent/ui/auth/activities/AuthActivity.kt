@@ -133,7 +133,7 @@ class AuthActivity : AppCompatActivity() {
             } catch (e: ApiException) {
                 showSnackBar(
                     this,
-                    getString(R.string.text_result_login_failed),
+                    getString(R.string.text_message_error_something),
                     binding.root
                 )
             }
