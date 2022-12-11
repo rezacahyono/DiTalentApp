@@ -9,15 +9,17 @@
     <string name="text_button_login_now">Masuk Sekarang</string>
     <string name="text_button_login_using_google">Masuk Dengan Google</string>
 
-    <string name="title_slide_one"><![CDATA[<font color=#87000000>What is Lorem </font> <font color=#FF903F>Ipsum?</font>]]></string>
-    <string name="title_slide_two"><![CDATA[<font color=#87000000>Where can </font> <font color=#FF903F>I get some?</font>]]></string>
-    <string name="title_slide_three"><![CDATA[<font color=#87000000>Why do</font> <font color=#FF903F>we use it?</font>]]></string>
+    <string name="title_slide_one"><![CDATA[<font color=#87000000>Apa itu </font> <font color=#FF903F>DiTalent?</font>]]></string>
+    <string name="title_slide_two"><![CDATA[<font color=#87000000>Kenapa harus </font> <font color=#FF903F>kolaborasi?</font>]]></string>
+    <string name="title_slide_three"><![CDATA[<font color=#87000000>Mengapa harus</font> <font color=#FF903F>DiTalent?</font>]]></string>
 
-    <string name="description_slide_one">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
-    <string name="description_slide_two">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</string>
-    <string name="description_slide_three">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
+    <string name="description_slide_one">DiTalent adalah platform yang menyatukan influencer dan pemain umkm untuk menciptakan kolaborasi yang lebih otentik.</string>
+    <string name="description_slide_two">Kami percaya pada kekuatan manusia dan dampak yang bisa mereka miliki ketika mereka berkolaborasi dalam konteks yang tepat.</string>
+    <string name="description_slide_three">DiTalent menghubungkan influencer dan pemain ukm dalam satu tempat, sehingga Anda dapat menemukan pasangan yang sempurna..</string>
 
     <string name="text_first_run_about_app">DiTalent platform yang menyatukan influencer dan pemain umkm untuk menciptakan kolaborasi yang lebih otentik.</string>
+
+    <string name="text_about_app">DiTalent adalah platform yang menyatukan influencer dan pemain umkm untuk menciptakan kolaborasi yang lebih otentik. Kami percaya pada kekuatan manusia dan dampak yang bisa mereka miliki ketika mereka berkolaborasi dalam konteks yang tepat. DiTalent menghubungkan influencer dan pemain ukm dalam satu tempat, sehingga Anda dapat menemukan pasangan yang sempurna.</string>
 
     <!-- Text login  -->
     <string name="login">Login</string>
@@ -105,6 +107,9 @@
     <string name="confirmation_success_reward_title">Selamat</string>
     <string name="confirmation_success_reward_desc">Reward Anda telah diaktifkan</string>
     <string name="content_desc_confirmation">ilustration for confrimation</string>
+    <string name="title_reward_1">Kumpulkan 50 point, dapatkan tripod hp menarik</string>
+    <string name="title_reward_2">Kumpulkan 120 point, dapatkan light ring menarik</string>
+    <string name="title_reward_3">Kumpulkan 200 point, dapatkan webcam menarik</string>
 
     <!-- Home Influencer    -->
     <string name="greeting_user">Hai, %s</string>
@@ -136,14 +141,33 @@
     <string name="cta_see_all">Lihat Semua</string>
     <string name="tets_go">Ayoo!</string>
     <string name="desc_lets_go">Buat project kamu untuk meningkatkan penjualan kamu !</string>
-    <string name="desc_banner_umkm">Iklankan merek Anda dengan influencer yang sesuai dan lebih baik dengan citra bisnis Anda.</string>
+    <string name="desc_banner_umkm">Iklankan bisnis Anda dengan influencer yang sesuai dan lebih baik dengan citra bisnis Anda.</string>
     <string name="banner">Banner</string>
     <string name="avatar">Avatar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    
+
+
+    <string name="filter">Filter</string>
     <string name="message_logout">Kamu yakin untuk keluar ?</string>
     <string name="yap">Yap</string>
+    <string name="clear">Clear</string>
+    <string name="apply">Terapkan</string>
+    <string name="gender">Jenis kelamin</string>
+    <string name="sort">Urutkan</string>
+    <string name="rate">Rate</string>
+    <string name="rating">Rating</string>
+    <string name="followers">Followers</string>
+    <string name="high_rate">Rate Tertinggi</string>
+    <string name="low_rate">Harga Terendah</string>
+    <string name="in_new">Terbaru</string>
+    <string name="highest">Tertinggi</string>
+    <string name="lowest">Terendah</string>
+    <string name="male">Laki-Laki</string>
+    <string name="female">Perempuan</string>
+    <string name="high_followers">Followers Tertinggi</string>
+    <string name="low_followers">Followers Terendah</string>
+    <string name="four_up_rating">4 Keatas</string>
 
 
 </resources>

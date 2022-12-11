@@ -23,6 +23,10 @@ import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.firestore.auth.FirebaseAuthCredentialsProvider
+import java.text.NumberFormat
+import java.util.*
+import kotlin.math.ln
+import kotlin.math.pow
 
 object Utilities {
 
@@ -161,6 +165,25 @@ object Utilities {
         return ContextCompat.getColor(context, color)
     }
 
+    fun getFormatedNumber(count: Long): String {
+        if (count < 1000) return "" + count
+        val exp = (ln(count.toDouble()) / ln(1000.0)).toInt()
+        return String.format("%.1f %c", count / 1000.0.pow(exp.toDouble()), "kMGTPE"[exp - 1])
+    }
+
+    fun getFormattedCurrency(value: Int): String{
+        val format = NumberFormat.getCurrencyInstance()
+        format.maximumFractionDigits = 0
+        format.currency = Currency.getInstance("IDR")
+        return format.format(value.toDouble())
+    }
+
+    fun String.cleanListInfluence(): String{
+        return this.replace("[","")
+            .replace("]","")
+            .replace(","," | ")
+    }
+
     fun handlingException(exception: Throwable): Int {
         return when (exception) {
             is FirebaseAuthInvalidUserException -> R.string.text_message_error_auth_something_wrong
@@ -169,4 +192,5 @@ object Utilities {
             else -> R.string.text_message_error_something
         }
     }
+
 }

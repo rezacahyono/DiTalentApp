@@ -3,36 +3,36 @@ package com.capstone.ditalent.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.capstone.ditalent.R
 import com.capstone.ditalent.databinding.ItemRowTalentBinding
-import com.capstone.ditalent.model.Talent
 import com.capstone.ditalent.model.User
 import com.capstone.ditalent.utils.Constant
+import com.capstone.ditalent.utils.Utilities.cleanListInfluence
 import com.capstone.ditalent.utils.Utilities.dpToPx
+import com.capstone.ditalent.utils.Utilities.getFormattedCurrency
 import com.capstone.ditalent.utils.Utilities.getInitialName
 import com.capstone.ditalent.utils.Utilities.randomColor
 
 class ListTalentAdapter(
     private val onClickItem: (String) -> Unit
-) : ListAdapter<Pair<User, Talent>, ListTalentAdapter.ListTalentViewHolder>(DiffCallback) {
+) : ListAdapter<User, ListTalentAdapter.ListTalentViewHolder>(DiffCallback) {
     private lateinit var ctx: Context
 
     inner class ListTalentViewHolder(
         private val binding: ItemRowTalentBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(talent: Pair<User, Talent>) {
+        fun bind(user: User) {
             binding.apply {
 
-                val photo = talent.first.photo
+                val photo = user.photo
                 if (photo.isNullOrBlank() || photo == Constant.NULL) {
                     ivAvatar.apply {
-                        avatarInitials = talent.first.name?.getInitialName()
+                        avatarInitials = user.name?.getInitialName()
                         avatarInitialsBackgroundColor = randomColor(ctx)
                         avatarInitialsTextSize = ctx.dpToPx(80F)
                     }
@@ -40,13 +40,19 @@ class ListTalentAdapter(
                     ivAvatar.load(photo)
                 }
 
-                tvName.text = talent.first.name
+                tvName.text = user.name
                 ratingBar.rating = 4.4F
-                tvRate.text = talent.second.rate.toString()
-                tvCatInfluences.text = "Fashion | Food"
+                val talent = user.talent
+                if (talent != null) {
+                    tvRate.text = getFormattedCurrency(talent.rate)
+                    tvCatInfluences.apply {
+                        isVisible = talent.influence.isNotEmpty()
+                        text = talent.influence.toString().cleanListInfluence()
+                    }
+                }
 
                 root.setOnClickListener {
-                    talent.first.name?.let {
+                    user.name?.let {
                         onClickItem(it)
                     }
                 }
@@ -66,19 +72,19 @@ class ListTalentAdapter(
         holder.bind(data)
     }
 
-    private companion object DiffCallback : DiffUtil.ItemCallback<Pair<User, Talent>>() {
+    private companion object DiffCallback : DiffUtil.ItemCallback<User>() {
         override fun areItemsTheSame(
-            oldItem: Pair<User, Talent>,
-            newItem: Pair<User, Talent>
+            oldItem: User,
+            newItem: User
         ): Boolean {
-            return oldItem.first == newItem.first && oldItem.second == newItem.second
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: Pair<User, Talent>,
-            newItem: Pair<User, Talent>
+            oldItem: User,
+            newItem: User
         ): Boolean {
-            return oldItem.first.name == newItem.first.name && oldItem.second == newItem.second
+            return oldItem.name == newItem.name
         }
 
     }

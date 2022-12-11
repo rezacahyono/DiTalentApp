@@ -17,7 +17,7 @@
             android:id="@+id/iv_project"
             android:layout_width="match_parent"
             android:layout_height="138dp"
-            android:background="@drawable/cat"
+            android:background="@drawable/banner_reward_1"
             android:contentDescription="@string/content_desc_iv_project"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"

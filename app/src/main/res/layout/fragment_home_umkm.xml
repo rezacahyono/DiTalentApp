@@ -76,10 +76,10 @@
                 android:id="@+id/edt_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:enabled="false"
+                android:focusable="false"
                 android:hint="@string/search_talent"
-                android:imeOptions="actionNext"
-                android:inputType="textEmailAddress"
+                android:inputType="none"
+                android:cursorVisible="false"
                 android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -96,7 +96,7 @@
             app:layout_constraintTop_toBottomOf="@id/layout_edt_search" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_cta_reward_more"
+            android:id="@+id/tv_cta_talent_more"
             style="@style/Widget.DiTalent.Text.Cta"
             android:layout_marginEnd="@dimen/root_padding"
             android:text="@string/cta_see_all"

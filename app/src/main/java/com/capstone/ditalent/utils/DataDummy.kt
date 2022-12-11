@@ -7,11 +7,9 @@ import com.capstone.ditalent.R
 object DataDummy {
 
     val listReward: List<Reward> = listOf(
-        Reward(R.drawable.cat,R.string.content_desc_confirmation),
-        Reward(R.drawable.cat,R.string.content_desc_confirmation),
-        Reward(R.drawable.cat,R.string.content_desc_confirmation),
-        Reward(R.drawable.cat,R.string.content_desc_confirmation),
-        Reward(R.drawable.cat,R.string.content_desc_confirmation),
+        Reward(R.drawable.banner_reward_1,R.string.title_reward_1),
+        Reward(R.drawable.banner_reward_2,R.string.title_reward_2),
+        Reward(R.drawable.banner_reward_3,R.string.title_reward_3)
     )
 
 }

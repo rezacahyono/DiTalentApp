@@ -5,6 +5,7 @@
     style="@style/Widget.DiTalent.Card.Outlined"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/root_small_margin"
     android:layout_marginHorizontal="@dimen/root_small_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout

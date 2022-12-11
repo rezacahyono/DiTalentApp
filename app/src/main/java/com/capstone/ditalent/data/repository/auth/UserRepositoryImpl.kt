@@ -59,12 +59,6 @@ class UserRepositoryImpl @Inject constructor(
         flow<Result<UiText>> {
             val userCollection = db.collection(USERS_COLLECTION)
 
-            val roleData: Any = if (role == Role.TALENT.toString()) {
-                Talent()
-            } else {
-                Umkm()
-            }
-
             val userData = User(
                 id = firebaseUser.uid,
                 email = firebaseUser.email,
@@ -73,10 +67,13 @@ class UserRepositoryImpl @Inject constructor(
                 role = role
             )
 
-            userCollection.document(firebaseUser.uid).set(userData).await()
+            if (role == Role.TALENT.toString()) {
+                userData.talent = Talent()
+            } else {
+                userData.umkm = Umkm()
+            }
 
-            userCollection.document(firebaseUser.uid).collection(role).document(firebaseUser.uid)
-                .set(roleData).await()
+            userCollection.document(firebaseUser.uid).set(userData).await()
 
             emit(Result.Success(UiText.StringResource(R.string.text_result_register_success)))
         }.onStart { emit(Result.Loading) }
@@ -135,12 +132,6 @@ class UserRepositoryImpl @Inject constructor(
 
             user.updateProfile(profileUpdate).await()
 
-            val roleData: Any = if (role == Role.TALENT.toString()) {
-                Talent()
-            } else {
-                Umkm()
-            }
-
             val userData = User(
                 id = user.uid,
                 email = email,
@@ -150,9 +141,13 @@ class UserRepositoryImpl @Inject constructor(
                 role = role
             )
 
+            if (role == Role.TALENT.toString()) {
+                userData.talent = Talent()
+            } else {
+                userData.umkm = Umkm()
+            }
+
             userCollectionReference.document(user.uid).set(userData).await()
-            userCollectionReference.document(user.uid).collection(role).document(user.uid)
-                .set(roleData).await()
 
             emit(Result.Success(UiText.StringResource(R.string.text_result_register_success)))
         } ?: emit(Result.Error(UiText.StringResource(R.string.text_message_error_something)))

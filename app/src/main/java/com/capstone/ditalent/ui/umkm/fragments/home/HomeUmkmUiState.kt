@@ -6,5 +6,5 @@ import com.capstone.ditalent.model.User
 data class HomeUmkmUiState(
     val isError: Boolean = false,
     val isLoading: Boolean = false,
-    val talents: List<Pair<User, Talent>> = emptyList()
+    val talents: List<User> = emptyList()
 )

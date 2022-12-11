@@ -36,7 +36,7 @@ class HomeUmkmViewModel @Inject constructor(
 
     private fun getTalents() {
         viewModelScope.launch {
-            talentRepository.getUsersRoleTalent().collect { result ->
+            talentRepository.getTopUserRoleTalent().collect { result ->
                 when (result) {
                     is Result.Success -> {
                         _homeUmkmState.value = HomeUmkmUiState(talents = result.data)
