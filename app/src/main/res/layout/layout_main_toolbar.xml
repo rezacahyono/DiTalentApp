@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         app:titleCentered="true"
-        app:titleTextAppearance="@style/TextAppearance.DiTalent.Headline6"
+        app:titleTextAppearance="@style/TextAppearance.DiTalent.Subtitle1"
         app:titleTextColor="@color/white"
         tools:title="Title" />
 

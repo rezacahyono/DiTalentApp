@@ -3,7 +3,6 @@ package com.capstone.ditalent.ui.auth.activities
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +14,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 import com.capstone.ditalent.R
+import com.capstone.ditalent.component.LoadingDialog
 import com.capstone.ditalent.databinding.ActivityAuthBinding
 import com.capstone.ditalent.databinding.DialogBottomChooseRoleBinding
 import com.capstone.ditalent.model.Role
@@ -24,6 +24,7 @@ import com.capstone.ditalent.ui.boarding.BoardingViewModel
 import com.capstone.ditalent.ui.talent.activities.TalentActivity
 import com.capstone.ditalent.ui.umkm.activities.UmkmActivity
 import com.capstone.ditalent.utils.UiText
+import com.capstone.ditalent.utils.Utilities.observeOnce
 import com.capstone.ditalent.utils.Utilities.showSnackBar
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -48,6 +49,8 @@ class AuthActivity : AppCompatActivity() {
 
     private var role: Role? = null
 
+    private lateinit var loadingDialog: LoadingDialog
+
     private val boardingViewModel: BoardingViewModel by viewModels()
     private val loginViewModel: LoginViewModel by viewModels()
 
@@ -58,11 +61,9 @@ class AuthActivity : AppCompatActivity() {
 
         splashScreen.apply {
             setKeepOnScreenCondition {
-                boardingViewModel.isFirstRunBoarding.value == null
-            }
-            setKeepOnScreenCondition {
                 loginViewModel.currentUser.value != null
             }
+
         }
 
         boardingViewModel.isFirstRunBoarding.observe(this) { isFirstRun ->
@@ -83,6 +84,8 @@ class AuthActivity : AppCompatActivity() {
 
         _binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        loadingDialog = LoadingDialog(this)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container_auth) as NavHostFragment
@@ -107,15 +110,21 @@ class AuthActivity : AppCompatActivity() {
                     val credential = GoogleAuthProvider.getCredential(token, null)
                     loginViewModel.loginWithGoogle(credential)
                     loginViewModel.loginUiState.observe(this@AuthActivity) { state ->
-                        if (state.isError) {
-                            showSnackBar(
-                                this@AuthActivity,
-                                getString((state.message as UiText.StringResource).id),
-                                binding.root
-                            )
+                        when {
+                            state.isError -> {
+                                loadingDialog.hideDialog()
+                                showSnackBar(
+                                    this@AuthActivity,
+                                    getString((state.message as UiText.StringResource).id),
+                                    binding.root
+                                )
+                            }
+                            state.isLoading -> loadingDialog.showDialog()
+                            state.isSuccess -> loadingDialog.hideDialog()
+
                         }
                     }
-                    loginViewModel.checkUserIsExists.observe(this) { exists ->
+                    loginViewModel.checkUserIsExists.observeOnce(this) { exists ->
                         if (!exists) {
                             showDialogChooseRole()
                         }
@@ -124,7 +133,7 @@ class AuthActivity : AppCompatActivity() {
             } catch (e: ApiException) {
                 showSnackBar(
                     this,
-                    getString(R.string.text_result_login_failed),
+                    getString(R.string.text_message_error_something),
                     binding.root
                 )
             }
@@ -143,12 +152,35 @@ class AuthActivity : AppCompatActivity() {
                     } else {
                         Role.TALENT
                     }
-                loginViewModel.addUser(role!!.toString())
+                loginViewModel.addUser(role!!.toString()).observe(this@AuthActivity) { state ->
+                    when {
+                        state.isError -> {
+                            loadingDialog.hideDialog()
+                            showSnackBar(
+                                this@AuthActivity,
+                                getString((state.message as UiText.StringResource).id),
+                                binding.root
+                            )
+                        }
+                        state.isLoading -> loadingDialog.showDialog()
+                        state.isSuccess -> loadingDialog.hideDialog()
+
+                    }
+                }
                 _bindingBottomSheetRole = null
                 dismiss()
             }
             negativeButton(R.string.cancel) {
                 loginViewModel.logout()
+                loginViewModel.logoutUiState.observe(this@AuthActivity) { state ->
+                    if (state.isError) {
+                        showSnackBar(
+                            this@AuthActivity,
+                            getString((state.message as UiText.StringResource).id),
+                            binding.root
+                        )
+                    }
+                }
                 _bindingBottomSheetRole = null
                 dismiss()
             }

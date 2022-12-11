@@ -10,5 +10,9 @@ object Constant {
 
     const val ROLE = "role"
 
+    const val NAME = "name"
+    const val RATE = "rate"
+    const val AGE = "age"
+
     const val NULL = "null"
 }

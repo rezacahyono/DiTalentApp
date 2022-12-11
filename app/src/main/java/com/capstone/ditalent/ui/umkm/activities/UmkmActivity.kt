@@ -11,7 +11,6 @@ import com.capstone.ditalent.R
 import com.capstone.ditalent.databinding.ActivityUmkmBinding
 import com.capstone.ditalent.databinding.DialogBottomAboutAppBinding
 import com.capstone.ditalent.ui.umkm.fragments.home.HomeUmkmViewModel
-import com.capstone.ditalent.utils.Utilities.margin
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -67,13 +66,11 @@ class UmkmActivity : AppCompatActivity() {
                 R.id.project_umkm_nav,
                 R.id.chart_umkm_nav,
                 R.id.profile_umkm_nav -> {
-                    binding.fragmentContainerUmkm.margin(bottom = 56f)
                     bottomNav.isVisible = true
                     bottomAppBar.isVisible = true
                     fabNewProject.show()
                 }
                 else -> {
-                    binding.fragmentContainerUmkm.margin(bottom = 0f)
                     bottomNav.isVisible = false
                     bottomAppBar.isVisible = false
                     fabNewProject.hide()

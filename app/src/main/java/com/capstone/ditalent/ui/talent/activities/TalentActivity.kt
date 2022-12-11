@@ -2,7 +2,6 @@ package com.capstone.ditalent.ui.talent.activities
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -13,7 +12,6 @@ import com.capstone.ditalent.R
 import com.capstone.ditalent.databinding.ActivityTalentBinding
 import com.capstone.ditalent.databinding.DialogBottomAboutAppBinding
 import com.capstone.ditalent.ui.talent.fragments.home.HomeTalentViewModel
-import com.capstone.ditalent.utils.Utilities.margin
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -65,11 +63,9 @@ class TalentActivity : AppCompatActivity() {
                 R.id.project_talent_nav,
                 R.id.reward_talent_nav,
                 R.id.profile_talent_nav -> {
-                    binding.fragmentContainerTalent.margin(bottom = 56f)
                     bottomNav.isVisible = true
                 }
                 else -> {
-                    binding.fragmentContainerTalent.margin(bottom = 0f)
                     bottomNav.isVisible = false
                 }
             }

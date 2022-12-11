@@ -70,7 +70,6 @@ dependencies {
 
     // Coil image
     implementation "io.coil-kt:coil:2.2.2"
-    implementation "io.getstream:avatarview-coil:1.0.7"
 
     // Dots indicator
     implementation "com.tbuonomo:dotsindicator:4.3"
@@ -96,8 +95,6 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:20.4.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.4.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4'
-
-
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'

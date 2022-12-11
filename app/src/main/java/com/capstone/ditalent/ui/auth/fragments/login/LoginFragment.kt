@@ -89,9 +89,7 @@ class LoginFragment : Fragment() {
                 loginUiState.observe(viewLifecycleOwner) { state ->
                     when {
                         state.isSuccess -> {
-                            loginViewModel.getUser.observe(viewLifecycleOwner) {
-                                loadingDialog.hideDialog()
-                            }
+                            loadingDialog.hideDialog()
                         }
                         state.isLoading -> {
                             loadingDialog.showDialog()

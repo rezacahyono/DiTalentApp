@@ -39,7 +39,7 @@
 
         <RadioButton
             android:id="@+id/rb_choose_umkm"
-            style="@style/Widget.DiTalent.RadioButton"
+            style="@style/Widget.DiTalent.RadioButton.Role"
             android:layout_width="wrap_content"
             android:layout_marginEnd="@dimen/gutter_horizontal_radio_button"
             android:layout_weight="1"
@@ -48,7 +48,7 @@
 
         <RadioButton
             android:id="@+id/rb_choose_talent"
-            style="@style/Widget.DiTalent.RadioButton"
+            style="@style/Widget.DiTalent.RadioButton.Role"
             android:layout_width="wrap_content"
             android:layout_marginStart="@dimen/gutter_horizontal_radio_button"
             android:layout_weight="1"

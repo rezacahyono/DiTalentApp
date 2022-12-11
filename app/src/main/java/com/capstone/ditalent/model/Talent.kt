@@ -6,4 +6,5 @@ data class Talent(
     val region: String? = null,
     val gender: String? = null,
     val rate: Int = 0,
+    val influence: List<String> = emptyList()
 )

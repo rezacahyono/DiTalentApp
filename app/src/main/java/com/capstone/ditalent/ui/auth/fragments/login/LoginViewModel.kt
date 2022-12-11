@@ -1,5 +1,6 @@
 package com.capstone.ditalent.ui.auth.fragments.login
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.capstone.ditalent.data.repository.auth.UserRepository
 import com.capstone.ditalent.model.User
@@ -9,9 +10,6 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.capstone.ditalent.utils.Result
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
@@ -69,6 +67,7 @@ class LoginViewModel @Inject constructor(
     fun login(email: String, password: String) {
         viewModelScope.launch {
             userRepository.loginWithEmailPassword(email, password).collect { result ->
+                Log.d("TAG", "login: $result")
                 when (result) {
                     is Result.Success -> _loginUiState.value =
                         UiState(isSuccess = true, message = result.data)

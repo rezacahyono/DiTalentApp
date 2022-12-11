@@ -38,11 +38,11 @@
         <item name="colorOnPrimary">@color/white</item>
     </style>
 
-    <style name="Widget.DiTalent.RadioButton" parent="Widget.MaterialComponents.CompoundButton.RadioButton">
+    <style name="Widget.DiTalent.RadioButton.Role" parent="Widget.MaterialComponents.CompoundButton.RadioButton">
         <item name="android:button">@null</item>
         <item name="android:layout_height">@dimen/size_height_radio_button</item>
-        <item name="android:background">@drawable/selector_bg_btn</item>
-        <item name="android:textColor">@color/selector_text_btn</item>
+        <item name="android:background">@drawable/selector_bg_btn_role</item>
+        <item name="android:textColor">@color/selector_text_btn_role</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textAppearance">@style/TextAppearance.DiTalent.Button</item>
     </style>
@@ -55,6 +55,10 @@
         <item name="android:textAppearance">@style/TextAppearance.DiTalent.Cta</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="Widget.DiTalent.ActionButton" parent="@style/Widget.AppCompat.ActionButton">
+        <item name="textAllCaps">false</item>
     </style>
 
 
@@ -169,6 +173,20 @@
         <item name="shapeAppearance">@style/ShapeAppearance.DiTalent.MediumComponent</item>
     </style>
 
+    <style name="Widget.DiTalent.FullScreenDialog" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:statusBarColor">@color/purple</item>
+        <item name="android:windowAnimationStyle">@style/Animtion.Dialog.Filter</item>
+        <item name="android:actionMenuTextColor">@color/orange</item>
+        <item name="actionButtonStyle">@style/Widget.DiTalent.ActionButton</item>
+    </style>
+
+    <style name="Animtion.Dialog.Filter" parent="">
+        <item name="android:windowEnterAnimation">@anim/anim_slide_up</item>
+        <item name="android:windowExitAnimation">@anim/anim_slide_down</item>
+    </style>
+
     <!-- Card  -->
     <style name="Widget.DiTalent.Card.Outlined" parent="Widget.MaterialComponents.CardView">
         <item name="strokeWidth">2dp</item>
@@ -218,6 +236,44 @@
 
     <style name="Widget.DiTalent.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/ThemeOverlay.BottomSheetDialog</item>
+    </style>
+
+    <!-- Search view  -->
+    <style name="Widget.DiTalent.SearchView" parent="Widget.AppCompat.SearchView">
+        <item name="queryBackground">@null</item>
+        <item name="iconifiedByDefault">false</item>
+        <item name="android:background">@drawable/shape_bg_search</item>
+    </style>
+
+    <!--  Chip  -->
+    <style name="Widget.DiTalent.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/selector_bg_chip_filter</item>
+        <item name="android:textColor">@color/selector_text_chip_filter</item>
+        <item name="android:padding">4dp</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStrokeColor">@color/selector_chip_filter</item>
+        <item name="android:checkable">true</item>
+        <item name="chipIconVisible">false</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="closeIconVisible">false</item>
+    </style>
+
+    <!--  Slider  -->
+    <style name="Widget.DiTalent.Slider" parent="Widget.MaterialComponents.Slider">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.DiTalent.Slider</item>
+        <item name="labelStyle">@style/Widget.DiTalent.Tooltip</item>
+    </style>
+
+    <style name="ThemeOverlay.DiTalent.Slider" parent="">
+        <item name="colorPrimary">@color/purple</item>
+        <item name="colorOnPrimary">@color/purple_dark</item>
+        <item name="colorOnSurface">@color/purple</item>
+    </style>
+
+    <style name="Widget.DiTalent.Tooltip" parent="Widget.MaterialComponents.Tooltip">
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="backgroundTint">#D9D9D9</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.DiTalent.SmallComponent</item>
     </style>
 
 

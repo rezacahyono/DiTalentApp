@@ -18,6 +18,7 @@ import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 import com.capstone.ditalent.R
 import com.capstone.ditalent.adapter.BoardingAdapter
+import com.capstone.ditalent.component.LoadingDialog
 import com.capstone.ditalent.databinding.ActivityBoardingBinding
 import com.capstone.ditalent.databinding.DialogBottomChooseRoleBinding
 import com.capstone.ditalent.model.Boarding
@@ -27,6 +28,7 @@ import com.capstone.ditalent.ui.auth.fragments.login.LoginViewModel
 import com.capstone.ditalent.ui.talent.activities.TalentActivity
 import com.capstone.ditalent.ui.umkm.activities.UmkmActivity
 import com.capstone.ditalent.utils.UiText
+import com.capstone.ditalent.utils.Utilities.observeOnce
 import com.capstone.ditalent.utils.Utilities.showSnackBar
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -47,6 +49,8 @@ class BoardingActivity : AppCompatActivity() {
     @Inject
     lateinit var googleSignInClient: GoogleSignInClient
 
+    private lateinit var loadingDialog: LoadingDialog
+
     private val loginViewModel: LoginViewModel by viewModels()
 
     private var role: Role? = null
@@ -58,6 +62,8 @@ class BoardingActivity : AppCompatActivity() {
 
         hideSystemUi()
 
+        loadingDialog = LoadingDialog(this)
+
         loginViewModel.getUser.observe(this) { user ->
             when (user.role) {
                 Role.TALENT.toString() -> navigateToTalent()
@@ -66,7 +72,6 @@ class BoardingActivity : AppCompatActivity() {
         }
 
         setupSlideBoarding()
-
     }
 
     private fun setupSlideBoarding() {
@@ -124,17 +129,23 @@ class BoardingActivity : AppCompatActivity() {
                 account.idToken?.let { token ->
                     val credential = GoogleAuthProvider.getCredential(token, null)
                     loginViewModel.loginWithGoogle(credential)
-                    loginViewModel.loginUiState.observe(this) { state ->
-                        if (state.isError) {
-                            showSnackBar(
-                                this,
-                                getString((state.message as UiText.StringResource).id),
-                                binding.root
-                            )
+                    loginViewModel.loginUiState.observe(this@BoardingActivity) { state ->
+                        when {
+                            state.isError -> {
+                                loadingDialog.hideDialog()
+                                showSnackBar(
+                                    this@BoardingActivity,
+                                    getString((state.message as UiText.StringResource).id),
+                                    binding.root
+                                )
+                            }
+                            state.isLoading -> loadingDialog.showDialog()
+                            state.isSuccess -> loadingDialog.hideDialog()
+
                         }
                     }
-                    loginViewModel.checkUserIsExists.observe(this) { exists ->
-                        if (!exists){
+                    loginViewModel.checkUserIsExists.observeOnce(this) { exists ->
+                        if (!exists) {
                             showDialogChooseRole()
                         }
                     }
@@ -142,7 +153,7 @@ class BoardingActivity : AppCompatActivity() {
             } catch (e: ApiException) {
                 showSnackBar(
                     this,
-                    getString(R.string.text_result_login_failed),
+                    getString(R.string.text_message_error_something),
                     binding.root
                 )
             }
@@ -161,12 +172,34 @@ class BoardingActivity : AppCompatActivity() {
                     } else {
                         Role.TALENT
                     }
-                loginViewModel.addUser(role!!.toString())
+                loginViewModel.addUser(role!!.toString()).observe(this@BoardingActivity) { state ->
+                    when {
+                        state.isError -> {
+                            loadingDialog.hideDialog()
+                            showSnackBar(
+                                this@BoardingActivity,
+                                getString((state.message as UiText.StringResource).id),
+                                binding.root
+                            )
+                        }
+                        state.isLoading -> loadingDialog.showDialog()
+                        state.isSuccess -> loadingDialog.hideDialog()
+                    }
+                }
                 _bindingBottomSheetRole = null
                 dismiss()
             }
             negativeButton(R.string.cancel) {
                 loginViewModel.logout()
+                loginViewModel.logoutUiState.observe(this@BoardingActivity) { state ->
+                    if (state.isError) {
+                        showSnackBar(
+                            this@BoardingActivity,
+                            getString((state.message as UiText.StringResource).id),
+                            binding.root
+                        )
+                    }
+                }
                 _bindingBottomSheetRole = null
                 dismiss()
             }
