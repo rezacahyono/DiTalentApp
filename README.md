@@ -1,7 +1,7 @@
 # Aplikasi DiTalent Capstone Project (C22-085)
 
 # Document 
-## [Project Brief](https://docs.google.com/document/d/1bo-QhXycGWiSGgLN1vJHOARxEwNrChgzCT9TNLkyC1M/edit#heading=h.difeb7dx4ubj)
+## [Project Brief](https://drive.google.com/file/d/1JGn5OYNoo1hCd_5otwF97hIjKIt73wRY/view?usp=sharing)
 ## [Presentation](https://docs.google.com/presentation/u/1/d/14y0EG9oPVKk2aFUGahjW1jgScaOQjWeSyCF3OtYbYfo/edit?usp=sharing)
 
 &nbsp; &nbsp; &nbsp; Usaha modern-rumahan menciptakan banyaknya UMKM di Indonesia yang berperan besar mendukung pertumbuhan ekonomi domestik. Era modern dan pasca pandemi proses promosi-komunikasi sangat tepat dilakukan secara online. Terkadang kita lebih mudah mengenal produk melalui influencer di sosial media. Permasalahannya, UMKM yang belum memiliki profesional di bidang promotion-marketing memiliki kesulitan untuk memasarkan produk. Sebagian memiliki keterbatasan dana untuk mempromosikan produknya. Maka dari itu, kami berinovasi membuat aplikasi yang membantu menyediakan perantara antara pemilik UMKM dengan para talent influencer, sehingga tanpa tim profesional UMKM mudah mempromosikan secara mandiri sesuai budget yang dimiliki. Kami berharap inovasi ini membantu Indonesia menuju perekonomian yang lebih baik.
